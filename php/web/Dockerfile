@@ -1,0 +1,13 @@
+FROM docker-registry.tools.wmflabs.org/toollabs-php
+
+RUN apt-get install --yes \
+    lighttpd \
+    php5-cgi \
+    fam
+
+RUN apt-get install --yes toollabs-webservice
+
+# This is where lighttpd puts its config files.
+# Very unideal, but let's stick to same places as
+# the gridengine for right now
+RUN chmod 0777 /var/run/lighttpd/
