@@ -4,7 +4,7 @@
 # Sets up:
 #   Extra Apt repo: Tools repo
 #   Users and Groups from labs LDAP (with mount required for nslcd)
-FROM docker-registry.tools.wmflabs.org/jessie-wikimedia
+FROM docker-registry.tools.wmflabs.org/wikimedia-jessie
 
 # Add tools debian repo to this container
 ADD tools.list /etc/apt/sources.list.d/tools.list
