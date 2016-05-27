@@ -19,6 +19,9 @@ IMAGES = {
     'base': {
         'php/base': [
             'php/web',
+        ],
+        'java/base': [
+            'java/web',
         ]
     }
 }
