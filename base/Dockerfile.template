@@ -1,5 +1,5 @@
 # Base toollabs user image
-# Name: docker-registry.tools.wmflabs.org/jessie-toollabs
+# Name: docker-registry.tools.wmflabs.org/toollabs-base
 # Source image: Debian Jessie
 # Sets up:
 #   Extra Apt repo: Tools repo

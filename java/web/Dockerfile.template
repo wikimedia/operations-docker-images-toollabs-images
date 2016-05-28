@@ -1,0 +1,5 @@
+# Toollabs Java webserver image
+# Name: docker-registry.tools.wmflabs.org/toollabs-java-web
+FROM {registry}/{image_prefix}-java
+
+RUN apt-get install --yes toollabs-webservice

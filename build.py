@@ -1,11 +1,14 @@
-#!/usr/bin/python3
-import subprocess
-import os
+#!/usr/bin/env python3
+"""
+Build and publish Docker images.
+"""
 import argparse
+import os
+import subprocess
 
 
 # The docker binary to use for executing commands
-DOCKER_BINARY = '/usr/bin/docker'
+DOCKER_BINARY = os.environ.get('DOCKER_BINARY', '/usr/bin/docker')
 # Base path of where the docker images are organized
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -22,8 +25,8 @@ IMAGES = {
         ],
         'java/base': [
             'java/web',
-        ]
-    }
+        ],
+    },
 }
 
 
@@ -35,7 +38,23 @@ def make_docker_tag(name, registry, image_prefix):
     )
 
 
+def make_dockerfile(name, registry, image_prefix):
+    image_dir = os.path.join(BASE_PATH, name)
+    template_file = os.path.join(image_dir, 'Dockerfile.template')
+    out_file = os.path.join(image_dir, 'Dockerfile')
+    kwargs = {'registry': registry, 'image_prefix': image_prefix}
+    with open(template_file, 'rt') as f_in:
+        with open(out_file, 'wt') as f_out:
+            for line in f_in:
+                f_out.write(expand_template(line, kwargs))
+
+
+def rm_dockerfile(name):
+    os.unlink(os.path.join(BASE_PATH, name, 'Dockerfile'))
+
+
 def build_image(name, registry, image_prefix):
+    make_dockerfile(name, registry, image_prefix)
     subprocess.check_call([
         DOCKER_BINARY,
         'build',
@@ -43,6 +62,7 @@ def build_image(name, registry, image_prefix):
         make_docker_tag(name, registry, image_prefix),
         os.path.join(BASE_PATH, name)
     ])
+    rm_dockerfile(name)
 
 
 def push_image(name, registry, image_prefix):
@@ -54,25 +74,33 @@ def push_image(name, registry, image_prefix):
 
 
 def lineage_of(name):
-    def children_of(val):
-        if type(val) == dict:
-            children = list(val.keys())
-            for k, v in val.items():
+    def children_of(node):
+        if type(node) == dict:
+            children = list(node.keys())
+            for k, v in node.items():
                 children += children_of(v)
             return children
-        return val
+        return node
 
-    def ancestors_of(val, cur_lineage):
-        if name in val:
-            return cur_lineage + children_of(val)
-        if type(val) == dict:
-            for k, v in val.items():
+    def ancestors_of(node, cur_lineage):
+        if name in node:
+            cur_lineage.append(name)
+            if type(node) == dict:
+                cur_lineage.extend(children_of(node[name]))
+            return cur_lineage
+
+        if type(node) == dict:
+            for k, v in node.items():
                 ret = ancestors_of(v, cur_lineage + [k])
                 if ret:
                     return ret
         return None
 
     return ancestors_of(IMAGES, [])
+
+
+def expand_template(template, params):
+    return template.format(**params)
 
 
 def main():

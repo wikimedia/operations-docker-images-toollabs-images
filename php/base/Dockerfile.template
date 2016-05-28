@@ -1,4 +1,6 @@
-FROM docker-registry.tools.wmflabs.org/toollabs-jessie
+# Toollabs PHP runtime image
+# Name: docker-registry.tools.wmflabs.org/toollabs-php
+FROM {registry}/{image_prefix}-base
 
 RUN apt-get install --yes \
     php5-cli \
