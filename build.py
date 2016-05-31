@@ -53,15 +53,17 @@ def rm_dockerfile(name):
     os.unlink(os.path.join(BASE_PATH, name, 'Dockerfile'))
 
 
-def build_image(name, registry, image_prefix):
+def build_image(name, registry, image_prefix, no_cache):
     make_dockerfile(name, registry, image_prefix)
-    subprocess.check_call([
+    args = [
         DOCKER_BINARY,
         'build',
-        '-t',
-        make_docker_tag(name, registry, image_prefix),
-        os.path.join(BASE_PATH, name)
-    ])
+        '-t', make_docker_tag(name, registry, image_prefix),
+    ]
+    if no_cache:
+        args.append('--no-cache')
+    args.append(os.path.join(BASE_PATH, name))
+    subprocess.check_call(args)
     rm_dockerfile(name)
 
 
@@ -125,6 +127,11 @@ def main():
         default='toollabs',
         help='Prefix to use for each image name to make sure they are easily differntiable',
     )
+    argparser.add_argument(
+        '--no-cache',
+        action='store_true',
+        help="Do not use docker's cache when building images, build from scratch"
+    )
 
     args = argparser.parse_args()
     images = lineage_of(args.image)
@@ -133,7 +140,7 @@ def main():
     # Separate build and push step so we do not push images if
     # any of them fail
     for image in images:
-        build_image(image, args.docker_registry, args.image_prefix)
+        build_image(image, args.docker_registry, args.image_prefix, args.no_cache)
 
     if args.push:
         for image in images:
