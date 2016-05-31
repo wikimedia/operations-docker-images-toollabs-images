@@ -1,6 +1,6 @@
 # Toollabs PHP webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-php-web
-FROM {registry}/{image_prefix}-php
+FROM {registry}/{image_prefix}-php-base
 
 RUN apt-get install --yes \
     lighttpd \
