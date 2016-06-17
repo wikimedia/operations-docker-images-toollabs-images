@@ -26,6 +26,7 @@ IMAGES = {
         'java/base': [
             'java/web',
         ],
+        'static-web': [],
     },
 }
 
