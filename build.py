@@ -27,6 +27,9 @@ IMAGES = {
             'java/web',
         ],
         'static-web': [],
+        'nodejs/base': [
+            'nodejs/web',
+        ],
     },
 }
 

@@ -1,0 +1,5 @@
+# Toollabs NodeJS webserver image
+# Name: docker-registry.tools.wmflabs.org/toollabs-nodejs-web
+FROM {registry}/{image_prefix}-nodejs-base
+
+RUN apt-get install --yes toollabs-webservice

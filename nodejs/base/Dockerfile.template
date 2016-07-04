@@ -1,0 +1,7 @@
+# Toollabs NodeJS runtime image
+# Name: docker-registry.tools.wmflabs.org/toollabs-nodejs
+FROM {registry}/{image_prefix}-base
+
+RUN apt-get install --yes \
+    npm \
+    nodejs-legacy
