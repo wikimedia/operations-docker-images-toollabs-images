@@ -30,6 +30,9 @@ IMAGES = {
         'nodejs/base': [
             'nodejs/web',
         ],
+        'python2/base': [
+            'python2/web',
+        ],
     },
 }
 

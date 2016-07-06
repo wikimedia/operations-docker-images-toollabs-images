@@ -1,0 +1,9 @@
+# Toollabs Python2 runtime image
+# Name: docker-registry.tools.wmflabs.org/toollabs-python
+FROM {registry}/{image_prefix}-base
+
+RUN apt-get install --yes \
+    python \
+    python-dev \
+    build-essential \
+    python-virtualenv
