@@ -33,6 +33,10 @@ IMAGES = {
         'python2/base': [
             'python2/web',
         ],
+        # Python refers to python3, because it is 2016!
+        'python/base': [
+            'python/web',
+        ]
     },
 }
 
