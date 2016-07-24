@@ -1,0 +1,5 @@
+# Toollabs Golang runtime image
+# Name: docker-registry.tools.wmflabs.org/toollabs-golang
+FROM {registry}/{image_prefix}-base
+
+RUN apt-get install --yes -t jessie-backports golang-go

@@ -1,5 +1,5 @@
 # Toollabs Java runtime image
-# Name: docker-registry.tools.wmflabs.org/toollabs-java
+# Name: docker-registry.tools.wmflabs.org/toollabs-jdk8
 FROM {registry}/{image_prefix}-base
 
 RUN apt-get install --yes -t jessie-backports \

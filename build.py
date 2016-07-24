@@ -23,8 +23,8 @@ IMAGES = {
         'php/base': [
             'php/web',
         ],
-        'java/base': [
-            'java/web',
+        'jdk8/base': [
+            'jdk8/web',
         ],
         'static-web': [],
         'nodejs/base': [
@@ -36,6 +36,9 @@ IMAGES = {
         # Python refers to python3, because it is 2016!
         'python/base': [
             'python/web',
+        ],
+        'golang/base': [
+            'golang/web',
         ]
     },
 }

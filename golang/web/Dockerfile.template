@@ -1,0 +1,5 @@
+# Toollabs golang webserver image
+# Name: docker-registry.tools.wmflabs.org/toollabs-golang-web
+FROM {registry}/{image_prefix}-golang-base
+
+RUN apt-get install --yes toollabs-webservice
