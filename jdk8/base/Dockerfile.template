@@ -3,4 +3,5 @@
 FROM {registry}/{image_prefix}-base
 
 RUN apt-get install --yes -t jessie-backports \
-    openjdk-8-jdk
+    openjdk-8-jdk \
+    maven
