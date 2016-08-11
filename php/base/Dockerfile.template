@@ -3,6 +3,7 @@
 FROM {registry}/{image_prefix}-base
 
 RUN apt-get install --yes \
+    php5-apcu \
     php5-cli \
     php5-curl \
     php5-gd \
