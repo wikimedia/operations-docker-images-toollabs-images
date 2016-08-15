@@ -1,0 +1,8 @@
+# Toollabs tcl webserver image
+# Name: docker-registry.tools.wmflabs.org/toollabs-tcl-web
+FROM {registry}/{image_prefix}-tcl-base
+
+RUN apt-get install --yes \
+    lighttpd
+
+RUN apt-get install --yes toollabs-webservice

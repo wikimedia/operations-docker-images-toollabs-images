@@ -1,0 +1,14 @@
+# Toollabs tcl runtime image
+# Name: docker-registry.tools.wmflabs.org/toollabs-tcl
+FROM {registry}/{image_prefix}-base
+
+# Bugs T58995
+RUN apt-get install --yes \
+    tcl \
+    mysqltcl \
+    tcl-tls \
+    tcl-trf \
+    tcllib \
+    tdom \
+    tclcurl \
+    tcl-thread
