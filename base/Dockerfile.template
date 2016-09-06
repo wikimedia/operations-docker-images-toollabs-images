@@ -14,5 +14,9 @@ RUN apt-get update
 # Setup NSS with LDAP. This requires that we mount /var/run/nslcd/socket from the
 # underlying labs host to the container. If not mounted, it will fallback gracefully
 # and just not use LDAP for NSS.
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends libnss-ldapd
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends libnss-ldapd locales
 ADD nsswitch.conf /etc/nsswitch.conf
+
+# Setup the C.UTF-8 Locale, since otherwise it defaults to the C one (which sucks!)
+RUN locale-gen C.UTF-8
+ENV LC_ALL C.UTF-8
