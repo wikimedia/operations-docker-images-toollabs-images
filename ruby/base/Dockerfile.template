@@ -1,0 +1,8 @@
+# Toollabs Ruby runtime image
+# Name: docker-registry.tools.wmflabs.org/toollabs-ruby
+FROM {registry}/{image_prefix}-base
+
+RUN apt-get install --yes \
+    ruby \
+    ruby-dev \
+    build-essential

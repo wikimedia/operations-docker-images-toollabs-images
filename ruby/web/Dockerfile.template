@@ -1,0 +1,8 @@
+# Toollabs Ruby webserver image
+# Name: docker-registry.tools.wmflabs.org/toollabs-ruby-web
+FROM {registry}/{image_prefix}-ruby-base
+
+RUN apt-get install --yes \
+    unicorn
+
+RUN apt-get install --yes toollabs-webservice

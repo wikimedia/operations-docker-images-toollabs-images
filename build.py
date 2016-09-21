@@ -43,7 +43,10 @@ IMAGES = {
         ],
         'golang/base': [
             'golang/web',
-        ]
+        ],
+        'ruby/base': [
+            'ruby/web',
+        ],
     },
     'trusty-legacy': {}
 }
