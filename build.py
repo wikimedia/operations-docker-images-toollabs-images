@@ -5,6 +5,7 @@ Build and publish Docker images.
 import argparse
 import os
 import subprocess
+import itertools
 
 
 # The docker binary to use for executing commands
@@ -44,6 +45,7 @@ IMAGES = {
             'golang/web',
         ]
     },
+    'trusty-legacy': {}
 }
 
 
@@ -127,7 +129,7 @@ def main():
     argparser.add_argument(
         'image',
         help='Which image to build. Will also build all ancestors + descendents of image',
-        choices=lineage_of('base')
+        choices=list(itertools.chain(*[lineage_of(base) for base in IMAGES.keys]))
     )
     argparser.add_argument(
         '--push',

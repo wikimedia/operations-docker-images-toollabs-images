@@ -1,0 +1,23 @@
+# Base toollabs user image
+# Name: docker-registry.tools.wmflabs.org/toollabs-trusty-legacy
+# Source image: Ubuntu Trusty
+# Sets up:
+#   Extra Apt repo: Tools repo
+#   Users and Groups from labs LDAP (with mount required for nslcd)
+FROM docker-registry.tools.wmflabs.org/wikimedia-trusty
+
+# Add tools debian repo to this container
+ADD tools.list /etc/apt/sources.list.d/tools.list
+
+RUN apt-get update
+
+# Setup NSS with LDAP. This requires that we mount /var/run/nslcd/socket from the
+# underlying labs host to the container. If not mounted, it will fallback gracefully
+# and just not use LDAP for NSS.
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends libnss-ldapd locales
+ADD nsswitch.conf /etc/nsswitch.conf
+
+# Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one (which sucks!)
+# For debian we use C.UTF-8, which doesn't seem to work on ubuntu?!
+RUN locale-gen en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
