@@ -17,6 +17,7 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends libnss-ldapd locales
 ADD nsswitch.conf /etc/nsswitch.conf
 
-# Setup the C.UTF-8 Locale, since otherwise it defaults to the C one (which sucks!)
-RUN locale-gen C.UTF-8
-ENV LC_ALL C.UTF-8
+# Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one (which sucks!)
+# Cultural imperialism, etc
+RUN locale-gen en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
