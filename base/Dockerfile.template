@@ -21,3 +21,7 @@ ADD nsswitch.conf /etc/nsswitch.conf
 # Cultural imperialism, etc
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
+
+# Some packages that pretty much everyone needs.
+# Be conservative, and do not include things that are language specific!
+RUN apt-get install --yes --no-install-recommends git
