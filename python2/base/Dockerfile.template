@@ -13,3 +13,6 @@ RUN apt-get install --yes \
 # under https://phabricator.wikimedia.org/T140110
 # libxml2 pip package - T140117
 RUN apt-get install --yes libxml2-dev libxslt-dev zlib1g-dev
+# MySQLdb-Python pip package - T140112
+# python2 only, python3 should use PyMySQL
+RUN apt-get install --yes libmysqlclient-dev
