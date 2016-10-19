@@ -129,7 +129,7 @@ def main():
     argparser.add_argument(
         'image',
         help='Which image to build. Will also build all ancestors + descendents of image',
-        choices=list(itertools.chain(*[lineage_of(base) for base in IMAGES.keys]))
+        choices=list(itertools.chain(*[lineage_of(base) for base in IMAGES.keys()]))
     )
     argparser.add_argument(
         '--push',
