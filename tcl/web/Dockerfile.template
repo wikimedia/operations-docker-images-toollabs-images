@@ -3,7 +3,8 @@
 FROM {registry}/{image_prefix}-tcl-base
 
 RUN apt-get install --yes \
-    lighttpd
+    lighttpd \
+    libfcgi-dev
 
 RUN apt-get install --yes toollabs-webservice
 
