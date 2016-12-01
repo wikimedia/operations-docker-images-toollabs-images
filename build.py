@@ -165,5 +165,6 @@ def main():
         for image in images:
             push_image(image, args.docker_registry, args.image_prefix)
 
+
 if __name__ == '__main__':
     main()
