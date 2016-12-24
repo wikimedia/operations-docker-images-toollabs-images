@@ -19,7 +19,11 @@ ADD nsswitch.conf /etc/nsswitch.conf
 
 # Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one (which sucks!)
 # Cultural imperialism, etc
-RUN locale-gen en_US.UTF-8
+# If only locale-gen took a parameter instead of requiring we edit this file...
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
 ENV LC_ALL en_US.UTF-8
 
 # Some packages that pretty much everyone needs.
