@@ -18,3 +18,5 @@ RUN apt-get install --yes libxml2-dev libxslt-dev zlib1g-dev
 RUN apt-get install --yes libmysqlclient-dev
 # Lots of usage of PyEnchant happens. T143449
 RUN apt-get install --yes libenchant-dev
+# We need icu for most internationalization things
+RUN apt-get install --yes libicu-dev
