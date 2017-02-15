@@ -2,7 +2,11 @@
 # Name: docker-registry.tools.wmflabs.org/toollabs-ruby
 FROM {registry}/{image_prefix}-base
 
-RUN apt-get install --yes \
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    build-essential \
     ruby \
     ruby-dev \
-    build-essential
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

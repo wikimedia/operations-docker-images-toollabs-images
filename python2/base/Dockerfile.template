@@ -2,21 +2,26 @@
 # Name: docker-registry.tools.wmflabs.org/toollabs-python
 FROM {registry}/{image_prefix}-base
 
-RUN apt-get install --yes \
+# Includes *-dev packages needed for installing popular python packages,
+# until they ship with manylinux wheels.
+# Each needs a ticket filed under T140110 and tracking here:
+# * T140117: libxml2-dev libxslt-dev zlib1g-dev
+# * T140112: libmysqlclient-dev
+# * T143449: libenchant-dev
+# * T157744: libicu-dev
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    build-essential \
+    libenchant-dev \
+    libicu-dev \
+    libmysqlclient-dev \
+    libxml2-dev \
+    libxslt-dev \
     python \
     python-dev \
-    build-essential \
-    python-virtualenv
+    python-virtualenv \
+    zlib1g-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# -dev packages needed for installing popular python packages,
-# until they ship with manylinux wheels. Needs a ticket filed
-# under https://phabricator.wikimedia.org/T140110
-# libxml2 pip package - T140117
-RUN apt-get install --yes libxml2-dev libxslt-dev zlib1g-dev
-# MySQLdb-Python pip package - T140112
-# python2 only, python3 should use PyMySQL
-RUN apt-get install --yes libmysqlclient-dev
-# Lots of usage of PyEnchant happens. T143449
-RUN apt-get install --yes libenchant-dev
-# We need icu for most internationalization things
-RUN apt-get install --yes libicu-dev

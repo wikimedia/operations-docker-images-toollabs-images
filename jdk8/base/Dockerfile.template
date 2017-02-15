@@ -2,6 +2,10 @@
 # Name: docker-registry.tools.wmflabs.org/toollabs-jdk8
 FROM {registry}/{image_prefix}-base
 
-RUN apt-get install --yes -t jessie-backports \
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes -t jessie-backports \
     openjdk-8-jdk \
-    maven
+    maven \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

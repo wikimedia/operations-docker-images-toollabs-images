@@ -21,3 +21,17 @@ Adding a new image
 Dockerfile.template files should use `{registry}` and `{image_prefix}`
 parameters to adapt to the command line options provided when running
 `build.py`.
+
+Conventions
+-----------
+* Each Dockerfile should only use `apt-get install` once.
+  This rule can be bent if some packages need to come from pinned repositories
+  (e.g. jessie-backports), but that may imply that an intermediate image is
+  more appropriate.
+* Packages should be listed one per line and sorted in alphabetical order.
+* Each `apt-get install` should be preceded by an `apt-get update` and
+  followed by an `apt-get clean`. See base/Dockerfile.template for an example.
+
+License
+-------
+[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)

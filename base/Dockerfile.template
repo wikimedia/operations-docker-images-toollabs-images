@@ -11,37 +11,42 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes --no-install-recommends \
     apt-transport-https \
-    ca-certificates
+    ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Add tools debian repo to this container
 ADD tools.list /etc/apt/sources.list.d/tools.list
 
-RUN apt-get update
+# Some packages that pretty much everyone needs.
+# Be conservative, and do not include things that are language specific!
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes --no-install-recommends \
+    curl \
+    emacs \
+    gawk \
+    git \
+    jq \
+    less \
+    libnss-ldapd \
+    locales \
+    nano \
+    sed \
+    vim \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Setup NSS with LDAP. This requires that we mount /var/run/nslcd/socket from the
-# underlying labs host to the container. If not mounted, it will fallback gracefully
-# and just not use LDAP for NSS.
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends libnss-ldapd locales
+# Setup NSS with LDAP. This requires that we mount /var/run/nslcd/socket from
+# the underlying labs host to the container. If not mounted, it will fallback
+# gracefully and just not use LDAP for NSS.
 ADD nsswitch.conf /etc/nsswitch.conf
 
-# Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one (which sucks!)
-# Cultural imperialism, etc
+# Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
+# (which sucks!) Cultural imperialism, etc
 # If only locale-gen took a parameter instead of requiring we edit this file...
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=en_US.UTF-8
 
 ENV LC_ALL en_US.UTF-8
-
-# Some packages that pretty much everyone needs.
-# Be conservative, and do not include things that are language specific!
-RUN apt-get install --yes --no-install-recommends \
-    git \
-    less \
-    nano \
-    vim \
-    emacs \
-    curl \
-    sed \
-    gawk \
-    jq

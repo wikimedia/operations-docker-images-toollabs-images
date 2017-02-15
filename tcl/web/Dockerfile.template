@@ -2,11 +2,14 @@
 # Name: docker-registry.tools.wmflabs.org/toollabs-tcl-web
 FROM {registry}/{image_prefix}-tcl-base
 
-RUN apt-get install --yes \
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    libfcgi-dev \
     lighttpd \
-    libfcgi-dev
-
-RUN apt-get install --yes toollabs-webservice
+    toollabs-webservice \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # This is where lighttpd puts its config files.
 # Very unideal, but let's stick to same places as
