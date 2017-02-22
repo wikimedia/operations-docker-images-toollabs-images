@@ -6,6 +6,13 @@
 #   Users and Groups from labs LDAP (with mount required for nslcd)
 FROM docker-registry.tools.wmflabs.org/wikimedia-jessie
 
+# Add https apt transport support for deb-tools.wmflabs.org
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes --no-install-recommends \
+    apt-transport-https \
+    ca-certificates
+
 # Add tools debian repo to this container
 ADD tools.list /etc/apt/sources.list.d/tools.list
 
