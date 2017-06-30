@@ -2,9 +2,14 @@
 # Name: docker-registry.tools.wmflabs.org/toollabs-nodejs
 FROM {registry}/{image_prefix}-base
 
+# Includes *-dev packages needed for installing popular packages.
+# Each needs a ticket filed under T140110 and tracking here:
+# * T169338: libicu-dev
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes \
+    build-essential \
+    libicu-dev \
     nodejs-legacy \
     npm \
     && apt-get clean \
