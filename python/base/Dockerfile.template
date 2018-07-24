@@ -8,12 +8,14 @@ FROM {registry}/{image_prefix}-base
 # * T140117: libxml2-dev libxslt-dev zlib1g-dev
 # * T143449: libenchant-dev
 # * T157744: libicu-dev
+# * T190274: libmysqlclient-dev
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes \
     build-essential \
     libenchant-dev \
     libicu-dev \
+    libmysqlclient-dev \
     libxml2-dev \
     libxslt-dev \
     python3 \
