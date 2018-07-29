@@ -48,6 +48,7 @@ IMAGES = {
             'ruby/web',
         ],
     },
+    'stretch': {},
     'trusty-legacy': {}
 }
 
