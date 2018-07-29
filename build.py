@@ -48,7 +48,11 @@ IMAGES = {
             'ruby/web',
         ],
     },
-    'stretch': {},
+    'stretch': {
+        'php72/base': [
+            'php72/web',
+        ],
+    },
     'trusty-legacy': {}
 }
 
