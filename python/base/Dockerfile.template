@@ -9,13 +9,16 @@ FROM {registry}/{image_prefix}-base
 # * T143449: libenchant-dev
 # * T157744: libicu-dev
 # * T190274: libmysqlclient-dev
+# * T202218: libldap2-dev libsasl2-dev
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes \
     build-essential \
     libenchant-dev \
     libicu-dev \
+    libldap2-dev \
     libmysqlclient-dev \
+    libsasl2-dev \
     libxml2-dev \
     libxslt-dev \
     python3 \
