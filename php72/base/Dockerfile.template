@@ -3,10 +3,7 @@
 FROM {registry}/{image_prefix}-stretch
 
 # Missing packages compared to php5.6:
-# * apcu (pulls in 7.0?)
-# * imagick, redis (blocked on T200666)
-# * zip (needs newer libzip)
-# * apc, ereg, mcrypt, mysql (removed upstream)
+# * ereg, mcrypt, mysql (removed upstream)
 
 ADD php72.list /etc/apt/sources.list.d/php72.list
 ADD thirdparty-php72.pin /etc/apt/preferences.d/thirdparty-php72
@@ -14,23 +11,24 @@ ADD thirdparty-php72.pin /etc/apt/preferences.d/thirdparty-php72
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes \
+    php-apcu-bc \
+    php-apcu \
     php7.2-bcmath \
     php7.2-bz2 \
     php7.2-cli \
     php7.2-curl \
     php7.2-dba \
     php7.2-gd \
-#    php7.2-imagick \
+    php-imagick \
     php7.2-intl \
     php7.2-mbstring \
     php7.2-mysql \
     php7.2-pgsql \
-#    php7.2-redis \
+    php-redis \
     php7.2-soap \
     php7.2-sqlite3 \
     php7.2-xsl \
-    # unzip is temp for composer until we can get php7.2-zip
-    unzip \
+    php7.2-zip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
