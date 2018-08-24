@@ -9,6 +9,7 @@ FROM {registry}/{image_prefix}-stretch
 # * apc, ereg, mcrypt, mysql (removed upstream)
 
 ADD php72.list /etc/apt/sources.list.d/php72.list
+ADD thirdparty-php72.pin /etc/apt/preferences.d/thirdparty-php72
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
