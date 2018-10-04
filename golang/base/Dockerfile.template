@@ -1,10 +1,10 @@
 # Toollabs Golang runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-golang
-FROM {registry}/{image_prefix}-base
+FROM {registry}/{image_prefix}-stretch
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes -t jessie-backports \
+    apt-get install --yes -t stretch-backports \
     golang-go \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

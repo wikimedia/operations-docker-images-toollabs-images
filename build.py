@@ -41,14 +41,14 @@ IMAGES = {
         'python/base': [
             'python/web',
         ],
-        'golang/base': [
-            'golang/web',
-        ],
         'ruby/base': [
             'ruby/web',
         ],
     },
     'stretch': {
+        'golang/base': [
+            'golang/web',
+        ],
         'php72/base': [
             'php72/web',
         ],
