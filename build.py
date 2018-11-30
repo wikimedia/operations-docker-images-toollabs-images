@@ -24,9 +24,6 @@ IMAGES = {
         'php/base': [
             'php/web',
         ],
-        'jdk8/base': [
-            'jdk8/web',
-        ],
         'static-web': [],
         'nodejs/base': [
             'nodejs/web',
@@ -48,6 +45,9 @@ IMAGES = {
     'stretch': {
         'golang/base': [
             'golang/web',
+        ],
+        'jdk8/base': [
+            'jdk8/web',
         ],
         'php72/base': [
             'php72/web',
