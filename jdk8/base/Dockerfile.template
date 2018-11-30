@@ -4,7 +4,7 @@ FROM {registry}/{image_prefix}-stretch
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes -t \
+    apt-get install --yes \
     openjdk-8-jdk \
     maven \
     && apt-get clean \
