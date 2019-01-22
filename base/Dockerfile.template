@@ -4,7 +4,7 @@
 # Sets up:
 #   Extra Apt repo: Tools repo
 #   Users and Groups from labs LDAP (with mount required for nslcd)
-FROM docker-registry.tools.wmflabs.org/wikimedia-jessie
+FROM docker-registry.wikimedia.org/wikimedia-jessie
 
 # Add https apt transport support for deb-tools.wmflabs.org
 RUN apt-get update \
