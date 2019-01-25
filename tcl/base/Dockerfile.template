@@ -1,6 +1,6 @@
 # Toollabs tcl runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-tcl
-FROM {registry}/{image_prefix}-base
+FROM {registry}/{image_prefix}-stretch
 
 # Bugs T58995
 RUN apt-get update \

@@ -31,9 +31,6 @@ IMAGES = {
         'python2/base': [
             'python2/web',
         ],
-        'tcl/base': [
-            'tcl/web',
-        ],
         # Python refers to python3, because it is 2016!
         'python/base': [
             'python/web',
@@ -51,6 +48,9 @@ IMAGES = {
         ],
         'php72/base': [
             'php72/web',
+        ],
+        'tcl/base': [
+            'tcl/web',
         ],
     },
     'trusty-legacy': {}
