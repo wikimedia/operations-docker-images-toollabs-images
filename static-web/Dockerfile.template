@@ -13,4 +13,4 @@ RUN apt-get update \
 # This is where lighttpd puts its config files.
 # Very unideal, but let's stick to same places as
 # the gridengine for right now
-RUN chmod 0777 /var/run/lighttpd/
+RUN mkdir /var/run/lighttpd/ && chmod 0777 /var/run/lighttpd/
