@@ -9,7 +9,7 @@ import itertools
 
 
 # The docker binary to use for executing commands
-DOCKER_BINARY = os.environ.get('DOCKER_BINARY', '/usr/bin/docker')
+DOCKER_BINARY = os.environ.get("DOCKER_BINARY", "/usr/bin/docker")
 # Base path of where the docker images are organized
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,86 +20,63 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # We rely on docker caching to ensure this is not super
 # dead slow.
 IMAGES = {
-    'base': {
-        'php/base': [
-            'php/web',
-        ],
-        'static-web': [],
-        'nodejs/base': [
-            'nodejs/web',
-        ],
-        'python2/base': [
-            'python2/web',
-        ],
+    "base": {
+        "php/base": ["php/web"],
+        "static-web": [],
+        "nodejs/base": ["nodejs/web"],
+        "python2/base": ["python2/web"],
         # Python refers to python3, because it is 2016!
-        'python/base': [
-            'python/web',
-        ],
-        'ruby/base': [
-            'ruby/web',
-        ],
+        "python/base": ["python/web"],
+        "ruby/base": ["ruby/web"],
     },
-    'stretch': {
-        'golang/base': [
-            'golang/web',
-        ],
-        'jdk8/base': [
-            'jdk8/web',
-        ],
-        'php72/base': [
-            'php72/web',
-        ],
-        'tcl/base': [
-            'tcl/web',
-        ],
+    "stretch": {
+        "golang/base": ["golang/web"],
+        "jdk8/base": ["jdk8/web"],
+        "php72/base": ["php72/web"],
+        "tcl/base": ["tcl/web"],
     },
-    'trusty-legacy': {}
+    "trusty-legacy": {},
 }
 
 
 def make_docker_tag(name, registry, image_prefix):
-    return '{registry}/{prefix}-{sanitized_name}'.format(
-        registry=registry,
-        prefix=image_prefix,
-        sanitized_name=name.replace('/', '-')
+    return "{registry}/{prefix}-{sanitized_name}".format(
+        registry=registry, prefix=image_prefix, sanitized_name=name.replace("/", "-")
     )
 
 
 def make_dockerfile(name, registry, image_prefix):
     image_dir = os.path.join(BASE_PATH, name)
-    template_file = os.path.join(image_dir, 'Dockerfile.template')
-    out_file = os.path.join(image_dir, 'Dockerfile')
-    kwargs = {'registry': registry, 'image_prefix': image_prefix}
-    with open(template_file, 'rt') as f_in:
-        with open(out_file, 'wt') as f_out:
+    template_file = os.path.join(image_dir, "Dockerfile.template")
+    out_file = os.path.join(image_dir, "Dockerfile")
+    kwargs = {"registry": registry, "image_prefix": image_prefix}
+    with open(template_file, "rt") as f_in:
+        with open(out_file, "wt") as f_out:
             for line in f_in:
                 f_out.write(expand_template(line, kwargs))
 
 
 def rm_dockerfile(name):
-    os.unlink(os.path.join(BASE_PATH, name, 'Dockerfile'))
+    os.unlink(os.path.join(BASE_PATH, name, "Dockerfile"))
 
 
 def build_image(name, registry, image_prefix, no_cache):
+    print("#" * 80)
+    print("Building {}/{}-{}".format(registry, image_prefix, name))
+    print("#" * 80)
     make_dockerfile(name, registry, image_prefix)
-    args = [
-        DOCKER_BINARY,
-        'build',
-        '-t', make_docker_tag(name, registry, image_prefix),
-    ]
+    args = [DOCKER_BINARY, "build", "-t", make_docker_tag(name, registry, image_prefix)]
     if no_cache:
-        args.append('--no-cache')
+        args.append("--no-cache")
     args.append(os.path.join(BASE_PATH, name))
     subprocess.check_call(args)
     rm_dockerfile(name)
 
 
 def push_image(name, registry, image_prefix):
-    subprocess.check_call([
-        DOCKER_BINARY,
-        'push',
-        make_docker_tag(name, registry, image_prefix)
-    ])
+    subprocess.check_call(
+        [DOCKER_BINARY, "push", make_docker_tag(name, registry, image_prefix)]
+    )
 
 
 def lineage_of(name):
@@ -135,34 +112,34 @@ def expand_template(template, params):
 def main():
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
-        'image',
-        help='Which image to build. Will also build all ancestors + descendents of image',
-        choices=list(itertools.chain(*[lineage_of(base) for base in IMAGES.keys()]))
+        "image",
+        help="Which image to build. Will also build all ancestors + descendents of image",
+        choices=list(itertools.chain(*[lineage_of(base) for base in IMAGES.keys()])),
     )
     argparser.add_argument(
-        '--push',
-        action='store_true',
-        help='Push the images to the repository afterwards'
+        "--push",
+        action="store_true",
+        help="Push the images to the repository afterwards",
     )
     argparser.add_argument(
-        '--docker-registry',
-        default='docker-registry.tools.wmflabs.org',
-        help='Name of docker registry to tag images with & push to'
+        "--docker-registry",
+        default="docker-registry.tools.wmflabs.org",
+        help="Name of docker registry to tag images with & push to",
     )
     argparser.add_argument(
-        '--image-prefix',
-        default='toollabs',
-        help='Prefix to use for each image name to make sure they are easily differntiable',
+        "--image-prefix",
+        default="toollabs",
+        help="Prefix to use for each image name to make sure they are easily differntiable",
     )
     argparser.add_argument(
-        '--no-cache',
-        action='store_true',
-        help="Do not use docker's cache when building images, build from scratch"
+        "--no-cache",
+        action="store_true",
+        help="Do not use docker's cache when building images, build from scratch",
     )
 
     args = argparser.parse_args()
     images = lineage_of(args.image)
-    print('Building following images: ', images)
+    print("Building following images: ", images)
 
     # Separate build and push step so we do not push images if
     # any of them fail
@@ -174,5 +151,5 @@ def main():
             push_image(image, args.docker_registry, args.image_prefix)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
