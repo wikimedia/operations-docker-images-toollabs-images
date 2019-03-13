@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Usage: ./run-image python-web
+#
+# Very handy when used with vagrant for local testing:
+#   vagrant ssh -t -c 'toollabs-images/run-image python-web'
+#
+exec docker run \
+    --rm --tty \
+    --interactive --entrypoint /bin/bash \
+    docker-registry.tools.wmflabs.org/toollabs-${1}:${2:-latest}
