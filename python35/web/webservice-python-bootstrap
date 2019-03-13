@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+if test ! -d ~/www/python/venv; then
+	python3 -m venv ~/www/python/venv
+fi
+
+~/www/python/venv/bin/pip install --upgrade pip
+
+if test -f ~/www/python/src/requirements.txt; then
+	~/www/python/venv/bin/pip install -r ~/www/python/src/requirements.txt
+fi
+
