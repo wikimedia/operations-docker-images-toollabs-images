@@ -1,1 +1,1 @@
-deb https://apt.wikimedia.org/wikimedia stretch-wikimedia thirdparty/php72
+deb https://apt.wikimedia.org/wikimedia stretch-wikimedia component/php72
