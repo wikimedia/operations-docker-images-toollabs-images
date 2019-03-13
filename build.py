@@ -3,9 +3,10 @@
 Build and publish Docker images.
 """
 import argparse
+import functools
+import itertools
 import os
 import subprocess
-import itertools
 
 
 # The docker binary to use for executing commands
@@ -38,6 +39,9 @@ IMAGES = {
     "trusty-legacy": {},
 }
 
+# Unbuffer print output (https://stackoverflow.com/a/40161931/8171)
+print = functools.partial(print, flush=True)
+
 
 def make_docker_tag(name, registry, image_prefix):
     return "{registry}/{prefix}-{sanitized_name}".format(
@@ -61,9 +65,9 @@ def rm_dockerfile(name):
 
 
 def build_image(name, registry, image_prefix, no_cache):
-    print("#" * 80)
-    print("Building {}/{}-{}".format(registry, image_prefix, name))
-    print("#" * 80)
+    print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
+    print("\x1b[32m  Building {}/{}-{}\x1b[0m".format(registry, image_prefix, name))
+    print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
     make_dockerfile(name, registry, image_prefix)
     args = [DOCKER_BINARY, "build", "-t", make_docker_tag(name, registry, image_prefix)]
     if no_cache:
