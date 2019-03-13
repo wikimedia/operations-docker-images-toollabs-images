@@ -1,0 +1,10 @@
+# Toollabs NodeJS 10 webserver image
+# Name: docker-registry.tools.wmflabs.org/toollabs-node10-web
+FROM {registry}/{image_prefix}-node10-base
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    toollabs-webservice \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

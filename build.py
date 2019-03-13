@@ -33,6 +33,7 @@ IMAGES = {
     "stretch": {
         "golang/base": ["golang/web"],
         "jdk8/base": ["jdk8/web"],
+        "node10/base": ["node10/web"],
         "php72/base": ["php72/web"],
         "python35/base": ["python35/web"],
         "tcl/base": ["tcl/web"],
