@@ -30,6 +30,7 @@ IMAGES = {
         "python/base": ["python/web"],
         "ruby/base": ["ruby/web"],
     },
+    "stretch-sssd": {"python35-sssd/base": ["python35-sssd/web"]},
     "stretch": {
         "golang/base": ["golang/web"],
         "jdk8/base": ["jdk8/web"],
