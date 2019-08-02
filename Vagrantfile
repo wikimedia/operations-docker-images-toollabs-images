@@ -6,8 +6,19 @@
 #
 # Provisions a Debian Stretch vm with minimal configuration needed to allow
 # the default vagrant user to run Docker commands.
+
+REQUIRED_PLUGINS = %w(vagrant-disksize)
+exit unless REQUIRED_PLUGINS.all? do |plugin|
+    Vagrant.has_plugin?(plugin) || (
+        puts "The #{plugin} plugin is required. Please install it with:"
+        puts "$ vagrant plugin install #{plugin}"
+        false
+    )
+end
+
 Vagrant.configure('2') do |config|
     config.vm.hostname = 'toollabs-images.dev'
+    config.disksize.size = '20GB'
 
     # Default VirtualBox provider
     config.vm.provider :virtualbox do |_vb, override|
@@ -19,7 +30,6 @@ Vagrant.configure('2') do |config|
     config.vm.network :forwarded_port, guest: 9001, host: 9001
 
     config.vm.provider :virtualbox do |vb|
-        # See http://www.virtualbox.org/manual/ch08.html for additional options.
         vb.customize ['modifyvm', :id, '--memory', '768']
         vb.customize ['modifyvm', :id, '--cpus', '2']
         vb.customize ['modifyvm', :id, '--ostype', 'Ubuntu_64']
