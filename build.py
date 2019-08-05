@@ -47,7 +47,9 @@ print = functools.partial(print, flush=True)
 
 def make_docker_tag(name, registry, image_prefix):
     return "{registry}/{prefix}-{sanitized_name}".format(
-        registry=registry, prefix=image_prefix, sanitized_name=name.replace("/", "-")
+        registry=registry,
+        prefix=image_prefix,
+        sanitized_name=name.replace("/", "-"),
     )
 
 
@@ -68,10 +70,19 @@ def rm_dockerfile(name):
 
 def build_image(name, registry, image_prefix, no_cache):
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
-    print("\x1b[32m  Building {}/{}-{}\x1b[0m".format(registry, image_prefix, name))
+    print(
+        "\x1b[32m  Building {}/{}-{}\x1b[0m".format(
+            registry, image_prefix, name
+        )
+    )
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
     make_dockerfile(name, registry, image_prefix)
-    args = [DOCKER_BINARY, "build", "-t", make_docker_tag(name, registry, image_prefix)]
+    args = [
+        DOCKER_BINARY,
+        "build",
+        "-t",
+        make_docker_tag(name, registry, image_prefix),
+    ]
     if no_cache:
         args.append("--no-cache")
     args.append(os.path.join(BASE_PATH, name))
@@ -120,7 +131,9 @@ def main():
     argparser.add_argument(
         "image",
         help="Which image to build. Will also build all ancestors + descendents of image",
-        choices=list(itertools.chain(*[lineage_of(base) for base in IMAGES.keys()])),
+        choices=list(
+            itertools.chain(*[lineage_of(base) for base in IMAGES.keys()])
+        ),
     )
     argparser.add_argument(
         "--push",
@@ -150,7 +163,9 @@ def main():
     # Separate build and push step so we do not push images if
     # any of them fail
     for image in images:
-        build_image(image, args.docker_registry, args.image_prefix, args.no_cache)
+        build_image(
+            image, args.docker_registry, args.image_prefix, args.no_cache
+        )
 
     if args.push:
         for image in images:
