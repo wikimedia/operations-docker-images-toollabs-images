@@ -45,8 +45,8 @@ def test_lineage_of():
 
 def test_make_docker_tag():
     tests = {
-        'registry/prefix-name': ['name', 'registry', 'prefix'],
-        'test/prefix-foo-bar-baz': ['foo/bar/baz', 'test', 'prefix'],
+        'registry/prefix-name:latest': ['name', 'registry', 'prefix', 'latest'],
+        'test/prefix-foo-bar-baz:stable': ['foo/bar/baz', 'test', 'prefix', 'stable'],
     }
     for expect, args in tests.items():
         yield check_make_docker_tag, args, expect

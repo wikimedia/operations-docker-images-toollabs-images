@@ -45,11 +45,12 @@ IMAGES = {
 print = functools.partial(print, flush=True)
 
 
-def make_docker_tag(name, registry, image_prefix):
-    return "{registry}/{prefix}-{sanitized_name}".format(
+def make_docker_tag(name, registry, image_prefix, tag):
+    return "{registry}/{prefix}-{sanitized_name}:{tag}".format(
         registry=registry,
         prefix=image_prefix,
         sanitized_name=name.replace("/", "-"),
+        tag=tag,
     )
 
 
@@ -68,7 +69,7 @@ def rm_dockerfile(name):
     os.unlink(os.path.join(BASE_PATH, name, "Dockerfile"))
 
 
-def build_image(name, registry, image_prefix, no_cache):
+def build_image(name, registry, image_prefix, no_cache, tag):
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
     print(
         "\x1b[32m  Building {}/{}-{}\x1b[0m".format(
@@ -81,7 +82,7 @@ def build_image(name, registry, image_prefix, no_cache):
         DOCKER_BINARY,
         "build",
         "-t",
-        make_docker_tag(name, registry, image_prefix),
+        make_docker_tag(name, registry, image_prefix, tag),
     ]
     if no_cache:
         args.append("--no-cache")
@@ -90,9 +91,13 @@ def build_image(name, registry, image_prefix, no_cache):
     rm_dockerfile(name)
 
 
-def push_image(name, registry, image_prefix):
+def push_image(name, registry, image_prefix, tag):
     subprocess.check_call(
-        [DOCKER_BINARY, "push", make_docker_tag(name, registry, image_prefix)]
+        [
+            DOCKER_BINARY,
+            "push",
+            make_docker_tag(name, registry, image_prefix, tag),
+        ]
     )
 
 
@@ -146,6 +151,18 @@ def main():
         help="Name of docker registry to tag images with & push to",
     )
     argparser.add_argument(
+        "-t",
+        "--tag",
+        default="testing",
+        help=(
+            "Tag for this image.  "
+            "The default is testing and other options is latest.  "
+            "Latest is what should be shipped to webservice."
+        ),
+        type=str,
+        choices=["latest", "testing"],
+    )
+    argparser.add_argument(
         "--image-prefix",
         default="toollabs",
         help="Prefix to use for each image name to make sure they are easily differntiable",
@@ -164,12 +181,16 @@ def main():
     # any of them fail
     for image in images:
         build_image(
-            image, args.docker_registry, args.image_prefix, args.no_cache
+            image,
+            args.docker_registry,
+            args.image_prefix,
+            args.no_cache,
+            args.tag,
         )
 
     if args.push:
         for image in images:
-            push_image(image, args.docker_registry, args.image_prefix)
+            push_image(image, args.docker_registry, args.image_prefix, args.tag)
 
 
 if __name__ == "__main__":
