@@ -1,5 +1,6 @@
 *.py[cod]
+/.python-version
 /.tox
+/.vagrant
 __pycache__/
 Dockerfile
-/.vagrant
