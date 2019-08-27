@@ -172,9 +172,18 @@ def main():
         action="store_true",
         help="Do not use docker's cache when building images, build from scratch",
     )
+    argparser.add_argument(
+        "--single",
+        "-s",
+        action="store_true",
+        help="Build only a single image rather than full chain",
+    )
 
     args = argparser.parse_args()
-    images = lineage_of(args.image)
+    if args.single:
+        images = (args.image,)
+    else:
+        images = lineage_of(args.image)
     print("Building following images: ", images)
 
     # Separate build and push step so we do not push images if
