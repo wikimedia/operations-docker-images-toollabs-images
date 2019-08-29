@@ -28,6 +28,7 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
 RUN apt-get update \
     && yes | apt-get install \
     gcc-4.9-base=4.9.2-10+deb8u1 \
+    libbz2-1.0=1.0.6-7+b3 \
     libgcc1=1:4.9.2-10+deb8u1 \
     libstdc++6=4.9.2-10+deb8u1 \
     perl-base=5.20.2-3+deb8u11 \
