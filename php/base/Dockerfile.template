@@ -1,6 +1,6 @@
 # Toollabs PHP runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-php
-FROM {registry}/{image_prefix}-base
+FROM {registry}/{image_prefix}-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

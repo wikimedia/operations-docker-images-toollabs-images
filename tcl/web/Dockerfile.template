@@ -1,6 +1,6 @@
 # Toollabs tcl webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-tcl-web
-FROM {registry}/{image_prefix}-tcl-base
+FROM {registry}/{image_prefix}-tcl-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

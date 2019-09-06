@@ -1,6 +1,6 @@
 # Toollabs Java webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-java-web
-FROM {registry}/{image_prefix}-jdk8-base
+FROM {registry}/{image_prefix}-jdk8-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

@@ -1,6 +1,6 @@
 # Toollabs Java runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-jdk8
-FROM {registry}/{image_prefix}-stretch
+FROM {registry}/{image_prefix}-stretch:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

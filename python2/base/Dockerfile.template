@@ -1,6 +1,6 @@
 # Toollabs Python2 runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-python
-FROM {registry}/{image_prefix}-base
+FROM {registry}/{image_prefix}-base:{tag}
 
 # Includes *-dev packages needed for installing popular python packages,
 # until they ship with manylinux wheels.

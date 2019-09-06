@@ -1,6 +1,6 @@
 # Toollabs NodeJS runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-nodejs
-FROM {registry}/{image_prefix}-base
+FROM {registry}/{image_prefix}-base:{tag}
 
 # Includes *-dev packages needed for installing popular packages.
 # Each needs a ticket filed under T140110 and tracking here:

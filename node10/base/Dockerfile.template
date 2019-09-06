@@ -1,6 +1,6 @@
 # Toollabs NodeJS 10 runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-node10
-FROM {registry}/{image_prefix}-stretch
+FROM {registry}/{image_prefix}-stretch:{tag}
 
 ADD node10.list /etc/apt/sources.list.d/node10.list
 

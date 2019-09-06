@@ -1,6 +1,6 @@
 # Toollabs PHP runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-php72
-FROM {registry}/{image_prefix}-stretch
+FROM {registry}/{image_prefix}-stretch:{tag}
 
 # Missing packages compared to php5.6:
 # * ereg, mcrypt, mysql (removed upstream)

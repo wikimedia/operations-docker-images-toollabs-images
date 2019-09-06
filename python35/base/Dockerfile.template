@@ -1,6 +1,6 @@
 # Toollabs Python3.5 runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-python35
-FROM {registry}/{image_prefix}-stretch
+FROM {registry}/{image_prefix}-stretch:{tag}
 
 # Includes *-dev packages needed for installing popular python packages,
 # until they ship with manylinux wheels.

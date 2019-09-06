@@ -1,6 +1,6 @@
 # Toollabs Ruby runtime image
 # Name: docker-registry.tools.wmflabs.org/toollabs-ruby
-FROM {registry}/{image_prefix}-base
+FROM {registry}/{image_prefix}-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

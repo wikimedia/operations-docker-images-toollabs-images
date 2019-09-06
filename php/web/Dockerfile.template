@@ -1,6 +1,6 @@
 # Toollabs PHP webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-php-web
-FROM {registry}/{image_prefix}-php-base
+FROM {registry}/{image_prefix}-php-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

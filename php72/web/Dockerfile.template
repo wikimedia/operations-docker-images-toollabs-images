@@ -1,6 +1,6 @@
 # Toollabs PHP 7.2 webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-php72-web
-FROM {registry}/{image_prefix}-php72-base
+FROM {registry}/{image_prefix}-php72-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

@@ -1,6 +1,6 @@
 # Toollabs Ruby webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-ruby-web
-FROM {registry}/{image_prefix}-ruby-base
+FROM {registry}/{image_prefix}-ruby-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

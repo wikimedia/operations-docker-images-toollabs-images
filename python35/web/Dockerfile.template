@@ -1,6 +1,6 @@
 # Toollabs Python 3.5 webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-python35-web
-FROM {registry}/{image_prefix}-python35-base
+FROM {registry}/{image_prefix}-python35-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

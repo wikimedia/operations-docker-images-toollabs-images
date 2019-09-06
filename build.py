@@ -54,11 +54,11 @@ def make_docker_tag(name, registry, image_prefix, tag):
     )
 
 
-def make_dockerfile(name, registry, image_prefix):
+def make_dockerfile(name, registry, image_prefix, tag):
     image_dir = os.path.join(BASE_PATH, name)
     template_file = os.path.join(image_dir, "Dockerfile.template")
     out_file = os.path.join(image_dir, "Dockerfile")
-    kwargs = {"registry": registry, "image_prefix": image_prefix}
+    kwargs = {"registry": registry, "image_prefix": image_prefix, "tag": tag}
     with open(template_file, "rt") as f_in:
         with open(out_file, "wt") as f_out:
             for line in f_in:
@@ -72,12 +72,12 @@ def rm_dockerfile(name):
 def build_image(name, registry, image_prefix, no_cache, tag):
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
     print(
-        "\x1b[32m  Building {}/{}-{}\x1b[0m".format(
-            registry, image_prefix, name
+        "\x1b[32m  Building {}/{}-{}:{}\x1b[0m".format(
+            registry, image_prefix, name, tag
         )
     )
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
-    make_dockerfile(name, registry, image_prefix)
+    make_dockerfile(name, registry, image_prefix, tag)
     args = [
         DOCKER_BINARY,
         "build",

@@ -1,6 +1,6 @@
 # Toollabs Python3 webserver image
 # Name: docker-registry.tools.wmflabs.org/toollabs-python-web
-FROM {registry}/{image_prefix}-python-base
+FROM {registry}/{image_prefix}-python-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
