@@ -1,0 +1,16 @@
+# Toolforge NodeJS runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-node6-sssd-base
+FROM {registry}/{image_prefix}-jessie-sssd:{tag}
+
+# Includes *-dev packages needed for installing popular packages.
+# Each needs a ticket filed under T140110 and tracking here:
+# * T169338: libicu-dev
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    build-essential \
+    libicu-dev \
+    nodejs-legacy \
+    npm \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

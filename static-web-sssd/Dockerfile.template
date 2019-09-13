@@ -1,0 +1,16 @@
+# Toolforge lighttpd based Static File Server
+# Name: docker-registry.tools.wmflabs.org/toolforge-static-web
+FROM {registry}/{image_prefix}-jessie-sssd:{tag}
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    lighttpd \
+    toollabs-webservice \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# This is where lighttpd puts its config files.
+# Very unideal, but let's stick to same places as
+# the gridengine for right now
+RUN mkdir /var/run/lighttpd/ && chmod 0777 /var/run/lighttpd/

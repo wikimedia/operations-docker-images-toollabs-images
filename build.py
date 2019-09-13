@@ -21,7 +21,7 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # We rely on docker caching to ensure this is not super
 # dead slow.
 IMAGES = {
-    "base": {
+    "base": {  # jessie + nslcd
         "php/base": ["php/web"],
         "static-web": [],
         "nodejs/base": ["nodejs/web"],
@@ -30,7 +30,22 @@ IMAGES = {
         "python/base": ["python/web"],
         "ruby/base": ["ruby/web"],
     },
-    "stretch-sssd": {"python35-sssd/base": ["python35-sssd/web"]},
+    "jessie-sssd": {
+        "python2-sssd/base": ["python2-sssd/web"],
+        "php5-sssd/base": ["php5-sssd/web"],
+        "static-web-sssd": [],
+        "node6-sssd/base": ["node6-sssd/web"],
+        "python34-sssd/base": ["python34-sssd/web"],
+        "ruby21-sssd/base": ["ruby21-sssd/web"],
+    },
+    "stretch-sssd": {
+        "python35-sssd/base": ["python35-sssd/web"],
+        "golang-sssd/base": ["golang-sssd/web"],
+        "jdk8-sssd/base": ["jdk8-sssd/web"],
+        "node10-sssd/base": ["node10-sssd/web"],
+        "php72-sssd/base": ["php72-sssd/web"],
+        "tcl86-sssd/base": ["tcl86-sssd/web"],
+    },
     "stretch": {
         "golang/base": ["golang/web"],
         "jdk8/base": ["jdk8/web"],
@@ -165,8 +180,11 @@ def main():
     )
     argparser.add_argument(
         "--image-prefix",
-        default="toollabs",
-        help="Prefix to use for each image name to make sure they are easily differntiable",
+        default="toolforge",
+        help=(
+            "Prefix to use for each image name to make sure they are easily"
+            " differentiable"
+        ),
     )
     argparser.add_argument(
         "--no-cache",

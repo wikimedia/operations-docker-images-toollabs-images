@@ -1,0 +1,18 @@
+# Toolforge tcl runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-tcl8.6-sssd-base
+FROM {registry}/{image_prefix}-stretch-sssd:{tag}
+
+# Bugs T58995
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    mysqltcl \
+    tcl \
+    tcl-thread \
+    tcl-tls \
+    tcl-trf \
+    tclcurl \
+    tcllib \
+    tdom \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

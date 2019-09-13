@@ -1,5 +1,5 @@
-# Base toollabs user image
-# Name: docker-registry.tools.wmflabs.org/toollabs-base-sssd
+# Base jessie user image
+# Name: docker-registry.tools.wmflabs.org/toolforge-jessie
 # Source image: Debian Jessie
 # Sets up:
 #   Extra Apt repo: Tools repo

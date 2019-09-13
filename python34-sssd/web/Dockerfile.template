@@ -1,6 +1,6 @@
-# Toolforge Python 3.5 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-python35-sssd-web
-FROM {registry}/{image_prefix}-python35-sssd-base:{tag}
+# Toolforge Python3 webserver image
+# Name: docker-registry.tools.wmflabs.org/toolforge-python34-sssd-web
+FROM {registry}/{image_prefix}-python34-sssd-base:{tag}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

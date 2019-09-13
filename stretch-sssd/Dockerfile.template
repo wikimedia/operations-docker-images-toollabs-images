@@ -1,5 +1,5 @@
-# Base toollabs stretch user image
-# Name: docker-registry.tools.wmflabs.org/toollabs-stretch-sssd
+# Base toolforge stretch user image
+# Name: docker-registry.tools.wmflabs.org/toolforge-stretch
 # Source image: Debian Stretch
 # Sets up:
 #   Extra Apt repo: Tools repo

@@ -1,6 +1,6 @@
-# Toolforge Python3.5 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-python35-sssd-base
-FROM {registry}/{image_prefix}-stretch-sssd:{tag}
+# Toolforge Python3 runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-python34-sssd-base
+FROM {registry}/{image_prefix}-jessie-sssd:{tag}
 
 # Includes *-dev packages needed for installing popular python packages,
 # until they ship with manylinux wheels.
@@ -8,7 +8,7 @@ FROM {registry}/{image_prefix}-stretch-sssd:{tag}
 # * T140117: libxml2-dev libxslt-dev zlib1g-dev
 # * T143449: libenchant-dev
 # * T157744: libicu-dev
-# * T190274: libmariadbclient-dev libmariadbclient-dev-compat
+# * T190274: libmysqlclient-dev
 # * T202218: libldap2-dev libsasl2-dev
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
@@ -17,8 +17,7 @@ RUN apt-get update \
     libenchant-dev \
     libicu-dev \
     libldap2-dev \
-    libmariadbclient-dev \
-    libmariadbclient-dev-compat \
+    libmysqlclient-dev \
     libsasl2-dev \
     libxml2-dev \
     libxslt-dev \

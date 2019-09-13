@@ -1,0 +1,12 @@
+# Toolforge Python2 webserver image
+# Name: docker-registry.tools.wmflabs.org/toolforge-python2-sssd-web
+FROM {registry}/{image_prefix}-python2-sssd-base:{tag}
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    toollabs-webservice \
+    uwsgi \
+    uwsgi-plugin-python \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
