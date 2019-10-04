@@ -40,16 +40,23 @@ Vagrant.configure('2') do |config|
         vb.customize ['guestproperty', 'set', :id, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', 10000]
     end
 
-    config.vm.provision :shell do |shell|
+    config.vm.provision 'apt', type: 'shell' do |shell|
         shell.inline = <<-SHELL
+            sudo apt-get update
             sudo apt-get install -y wget gnupg2 software-properties-common
             wget -qO - "https://wikitech.wikimedia.org/w/index.php?title=APT_repository/Stretch-Key&action=raw" | sudo apt-key add -
             sudo add-apt-repository "deb http://apt.wikimedia.org/wikimedia stretch-wikimedia main"
             sudo add-apt-repository "deb http://apt.wikimedia.org/wikimedia stretch-wikimedia thirdparty/k8s"
             sudo apt-get update
-            sudo apt-get install -y docker docker-engine vim git
+            sudo apt-get install -y docker docker-engine vim git curl
             sudo apt-get clean
             sudo usermod -aG docker vagrant
         SHELL
     end
+    config.vm.provision 'docker-registry', type: 'shell' do |shell|
+        shell.inline = <<-SHELL
+          docker run -d -p 5000:5000 --restart=always --name registry registry:2
+        SHELL
+    end
+    config.vm.provision 'dotfiles', type: 'file', source: '.dotfiles', destination: '$HOME'
 end
