@@ -1,0 +1,10 @@
+# Toolforge Java webserver image
+# Name: docker-registry.tools.wmflabs.org/toolforge-jdk11-web
+FROM {registry}/{image_prefix}-jdk11-base:{tag}
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    toollabs-webservice \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

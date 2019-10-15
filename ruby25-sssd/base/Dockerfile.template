@@ -1,0 +1,13 @@
+# Toolforge Ruby runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-ruby25-sssd-base
+FROM {registry}/{image_prefix}-buster-sssd:{tag}
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install --yes \
+    build-essential \
+    ruby \
+    ruby-dev \
+    libmariadb-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

@@ -54,6 +54,20 @@ IMAGES = {
         "python35/base": ["python35/web"],
         "tcl/base": ["tcl/web"],
     },
+    "buster": {
+        "golang111/base": ["golang111/web"],
+        "jdk11/base": ["jdk11/web"],
+        "php73/base": ["php73/web"],
+        "python37/base": ["python37/web"],
+        "ruby25/base": ["ruby25/web"],
+    },
+    "buster-sssd": {
+        "golang111-sssd/base": ["golang111-sssd/web"],
+        "jdk11-sssd/base": ["jdk11-sssd/web"],
+        "php73-sssd/base": ["php73-sssd/web"],
+        "python37-sssd/base": ["python37-sssd/web"],
+        "ruby25-sssd/base": ["ruby25-sssd/web"],
+    },
     "trusty-legacy": {},
 }
 
