@@ -1,5 +1,5 @@
 # Toolforge tcl webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-tcl8.6-sssd-web
+# Name: docker-registry.tools.wmflabs.org/toolforge-tcl86-sssd-web
 FROM {registry}/{image_prefix}-tcl8.6-sssd-base:{tag}
 
 RUN apt-get update \
