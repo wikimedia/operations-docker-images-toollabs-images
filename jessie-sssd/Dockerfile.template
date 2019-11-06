@@ -6,6 +6,11 @@
 #   Users and Groups from labs LDAP (with mount required for sssd)
 FROM docker-registry.wikimedia.org/wikimedia-jessie
 
+# Fix up apt config for ancient jessie usage
+ADD sources.list /etc/apt/sources.list
+ADD backports.list /etc/apt/sources.list.d/backports.list
+ADD 01checkvaliduntil /etc/apt/apt.conf.d/01checkvaliduntil
+
 # Add https apt transport support for deb-tools.wmflabs.org
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
@@ -17,6 +22,18 @@ RUN apt-get update \
 
 # Add tools debian repo to this container
 ADD tools.list /etc/apt/sources.list.d/tools.list
+
+# HACK: downgrade some packages from the upstream image that are no longer
+# available since the removal of the jessie-backports repo.
+RUN apt-get update \
+    && yes | apt-get install \
+    gcc-4.9-base=4.9.2-10+deb8u1 \
+    libbz2-1.0=1.0.6-7+b3 \
+    libgcc1=1:4.9.2-10+deb8u1 \
+    libstdc++6=4.9.2-10+deb8u1 \
+    perl-base=5.20.2-3+deb8u11 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Some packages that pretty much everyone needs.
 # Be conservative, and do not include things that are language specific!
