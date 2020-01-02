@@ -23,8 +23,9 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes --no-install-recommends \
+    busybox \
     curl \
-    emacs \
+    emacs-nox \
     gawk \
     git \
     jq \
@@ -33,9 +34,11 @@ RUN apt-get update \
     locales \
     nano \
     sed \
-    vim \
+    vim-tiny \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && /bin/busybox --install \
+    && ln -s /usr/bin/vim.tiny /usr/bin/vim
 
 # Setup NSS with LDAP/SSSD. This requires that we mount /var/lib/sss/pipes from
 # the underlying cloud host to the container. If not mounted, it will fallback
