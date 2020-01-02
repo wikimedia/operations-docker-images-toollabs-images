@@ -8,4 +8,4 @@
 exec docker run \
     --rm --tty \
     --interactive --entrypoint /bin/bash \
-    ${4:-docker-registry.tools.wmflabs.org}/${3:-toollabs}-${1:?type required}:${2:-latest}
+    ${4:-docker-registry.tools.wmflabs.org}/${3:-toolforge}-${1:?type required}:${2:-testing}

@@ -22,7 +22,7 @@ Vagrant.configure('2') do |config|
 
     # Default VirtualBox provider
     config.vm.provider :virtualbox do |_vb, override|
-        override.vm.box = 'debian/contrib-stretch64'
+        override.vm.box = 'debian/contrib-buster64'
     end
 
     config.vm.synced_folder '.', '/home/vagrant/toollabs-images'
@@ -43,12 +43,11 @@ Vagrant.configure('2') do |config|
     config.vm.provision 'apt', type: 'shell' do |shell|
         shell.inline = <<-SHELL
             sudo apt-get update
-            sudo apt-get install -y wget gnupg2 software-properties-common
-            wget -qO - "https://wikitech.wikimedia.org/w/index.php?title=APT_repository/Stretch-Key&action=raw" | sudo apt-key add -
-            sudo add-apt-repository "deb http://apt.wikimedia.org/wikimedia stretch-wikimedia main"
-            sudo add-apt-repository "deb http://apt.wikimedia.org/wikimedia stretch-wikimedia thirdparty/k8s"
+            sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common vim git
+            curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
             sudo apt-get update
-            sudo apt-get install -y docker docker-engine vim git curl
+            sudo apt-get install -y docker-ce
             sudo apt-get clean
             sudo usermod -aG docker vagrant
         SHELL
