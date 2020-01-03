@@ -1,10 +1,15 @@
-import build
-from nose.tools import assert_equals
+import os
+import pytest
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+import build  # noqa
 
 
 def assert_same(result, expect):
     """Check arrays for order-free equality."""
-    assert_equals(sorted(result), sorted(expect))
+    assert sorted(result) == sorted(expect)
 
 
 def test_lineage_of():
@@ -16,7 +21,7 @@ def test_lineage_of():
         }
     }
 
-    assert_equals(build.lineage_of("not_found"), None)
+    assert build.lineage_of("not_found") is None
     assert_same(
         build.lineage_of("base"),
         [
@@ -40,30 +45,29 @@ def test_lineage_of():
     assert_same(build.lineage_of("C1a1"), ["C1a1", "C1a", "C1", "C", "base"])
 
 
-def test_make_docker_tag():
-    tests = {
-        "registry/prefix-name:latest": ["name", "registry", "prefix", "latest"],
-        "test/prefix-foo-bar-baz:stable": [
-            "foo/bar/baz",
-            "test",
-            "prefix",
-            "stable",
-        ],
-    }
-    for expect, args in tests.items():
-        yield check_make_docker_tag, args, expect
-
-
-def check_make_docker_tag(given, expect):
-    assert_equals(build.make_docker_tag(*given), expect)
+@pytest.mark.parametrize(
+    "expect,args",
+    (
+        (
+            "registry/prefix-name:latest",
+            ["name", "registry", "prefix", "latest"],
+        ),
+        (
+            "test/prefix-foo-bar-baz:stable",
+            ["foo/bar/baz", "test", "prefix", "stable"],
+        ),
+    ),
+)
+def test_make_docker_tag(expect, args):
+    assert build.make_docker_tag(*args) == expect
 
 
 def test_expand_template():
     template = "foo:{foo}\nbar:{bar}"
-    assert_equals(
-        build.expand_template(template, {"foo": 1, "bar": 2}), "foo:1\nbar:2"
+    assert (
+        build.expand_template(template, {"foo": 1, "bar": 2}) == "foo:1\nbar:2"
     )
-    assert_equals(
-        build.expand_template(template, {"foo": 1, "bar": 2, "baz": 3}),
-        "foo:1\nbar:2",
+    assert (
+        build.expand_template(template, {"foo": 1, "bar": 2, "baz": 3})
+        == "foo:1\nbar:2"
     )
