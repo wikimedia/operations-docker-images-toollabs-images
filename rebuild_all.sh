@@ -11,13 +11,13 @@ clean_docker_layers () {
         xargs -r docker rmi
 }
 
-for series in base stretch buster; do
+for series in base stretch; do
     # Images for the legacy k8s cluster
     ./build.py --image-prefix toollabs --tag latest --no-cache --push $series
     clean_docker_layers
 done
 
-for series in jessie-sssd stretch-sssd buster-sssd; do
+for series in jessie-sssd stretch-sssd buster buster-sssd; do
     # Images for the 2020 k8s cluster
     ./build.py --image-prefix toolforge --tag latest --no-cache --push $series
     clean_docker_layers
