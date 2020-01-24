@@ -1,14 +1,19 @@
-#!/bin/bash
+#!/usr/bin/python3
+import os
+import subprocess
 
-set -euxo pipefail
 
-if test ! -d ~/www/python/venv; then
-	python3 -m venv ~/www/python/venv
-fi
+def run(args):
+    print('$ ' + ' '.join(args))
+    subprocess.check_call(args)
 
-~/www/python/venv/bin/pip install --upgrade pip
 
-if test -f ~/www/python/src/requirements.txt; then
-	~/www/python/venv/bin/pip install -r ~/www/python/src/requirements.txt
-fi
+venv = os.path.expanduser('~/www/python/venv')
+if not os.path.isdir(venv):
+    run(['python3', '-m', 'venv', venv])
 
+pip = os.path.join(venv, 'bin/pip')
+run([pip, 'install', '--upgrade', 'pip'])
+requirements = os.path.expanduser('~/www/python/src/requirements.txt')
+if os.path.isfile(requirements):
+    run([pip, 'install', '-r', requirements])
