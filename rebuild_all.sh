@@ -4,11 +4,12 @@
 set -Eeuo pipefail
 
 clean_docker_layers () {
-    docker ps --no-trunc -aqf "status=exited" | xargs docker rm
+    docker ps --no-trunc -aqf "status=exited" |
+        xargs --no-run-if-empty docker rm
     docker images --no-trunc | awk '$2=="<none>" { print $3 }' |
-        xargs -r docker rmi
+        xargs --no-run-if-empty docker rmi
     docker images -f "dangling=true" -q |
-        xargs -r docker rmi
+        xargs --no-run-if-empty docker rmi
 }
 
 for series in base stretch; do
