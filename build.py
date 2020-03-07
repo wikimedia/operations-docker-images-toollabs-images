@@ -21,15 +21,6 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # We rely on docker caching to ensure this is not super
 # dead slow.
 IMAGES = {
-    "base": {  # jessie + nslcd
-        "php/base": ["php/web"],
-        "static-web": [],
-        "nodejs/base": ["nodejs/web"],
-        "python2/base": ["python2/web"],
-        # Python refers to python3, because it is 2016!
-        "python/base": ["python/web"],
-        "ruby/base": ["ruby/web"],
-    },
     "jessie-sssd": {
         "python2-sssd/base": ["python2-sssd/web"],
         "php5-sssd/base": ["php5-sssd/web"],
@@ -46,21 +37,6 @@ IMAGES = {
         "php72-sssd/base": ["php72-sssd/web"],
         "tcl86-sssd/base": ["tcl86-sssd/web"],
     },
-    "stretch": {
-        "golang/base": ["golang/web"],
-        "jdk8/base": ["jdk8/web"],
-        "node10/base": ["node10/web"],
-        "php72/base": ["php72/web"],
-        "python35/base": ["python35/web"],
-        "tcl/base": ["tcl/web"],
-    },
-    "buster": {
-        "golang111/base": ["golang111/web"],
-        "jdk11/base": ["jdk11/web"],
-        "php73/base": ["php73/web"],
-        "python37/base": ["python37/web"],
-        "ruby25/base": ["ruby25/web"],
-    },
     "buster-sssd": {
         "golang111-sssd/base": ["golang111-sssd/web"],
         "jdk11-sssd/base": ["jdk11-sssd/web"],
@@ -68,7 +44,6 @@ IMAGES = {
         "python37-sssd/base": ["python37-sssd/web"],
         "ruby25-sssd/base": ["ruby25-sssd/web"],
     },
-    "trusty-legacy": {},
 }
 
 # Unbuffer print output (https://stackoverflow.com/a/40161931/8171)
