@@ -1,11 +1,12 @@
+{%- import 'macros.jinja2' as macros -%}
 # Toolforge Java runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-jdk11-sssd-base
 FROM {{registry}}/{{image_prefix}}-buster-sssd:{{tag}}
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes \
-    openjdk-11-jdk \
-    maven \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "openjdk-11-jdk",
+        "maven",
+    ]
+) }}
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}

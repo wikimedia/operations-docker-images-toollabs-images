@@ -1,14 +1,15 @@
+{%- import 'macros.jinja2' as macros -%}
 # Toolforge Python 3.5 webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-python35-sssd-web
 FROM {{registry}}/{{image_prefix}}-python35-sssd-base:{{tag}}
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes \
-    toollabs-webservice \
-    uwsgi \
-    uwsgi-plugin-python3 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "toollabs-webservice",
+        "uwsgi",
+        "uwsgi-plugin-python3",
+    ]
+) }}
 
 COPY webservice-python-bootstrap /usr/local/bin/
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}

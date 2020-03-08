@@ -1,18 +1,19 @@
+{%- import 'macros.jinja2' as macros -%}
 # Toolforge PHP webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-php5-sssd-web
 FROM {{registry}}/{{image_prefix}}-php5-sssd-base:{{tag}}
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes \
-    fam \
-    lighttpd \
-    php5-cgi \
-    toollabs-webservice \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "fam",
+        "lighttpd",
+        "php5-cgi",
+        "toollabs-webservice",
+    ]
+) }}
 
 # This is where lighttpd puts its config files.
 # Very unideal, but let's stick to same places as
 # the gridengine for right now
 RUN mkdir /var/run/lighttpd/ && chmod 0777 /var/run/lighttpd/
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}

@@ -1,0 +1,18 @@
+{##
+ # Install a list of Debian packages.
+ #
+ # @param list pkgs Packaages to install
+ # @param str apt_options Additional options to pass to `apt-get install`
+ #}
+{% macro apt_install(pkgs, apt_options='') -%}
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install {{ apt_options }} --yes \
+    {%- for pkg in pkgs %}
+    {{ pkg }} \
+    {%- endfor %}
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+{%- endmacro %}
+
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}

@@ -1,28 +1,29 @@
+{%- import 'macros.jinja2' as macros -%}
 # Toolforge PHP runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-php5-sssd-base
 FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes \
-    php5-apcu \
-    php5-cli \
-    php5-curl \
-    php5-gd \
-    php5-imagick \
-    php5-intl \
-    php5-mcrypt \
-    php5-mysqlnd \
-    php5-pgsql \
-    php5-redis \
-    php5-sqlite \
-    php5-xdebug \
-    php5-xsl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "php5-apcu",
+        "php5-cli",
+        "php5-curl",
+        "php5-gd",
+        "php5-imagick",
+        "php5-intl",
+        "php5-mcrypt",
+        "php5-mysqlnd",
+        "php5-pgsql",
+        "php5-redis",
+        "php5-sqlite",
+        "php5-xdebug",
+        "php5-xsl",
+    ]
+) }}
 
 # T172358 - install composer simlarly to ::toollabs::composer
 RUN git clone --depth 1 \
     https://gerrit.wikimedia.org/r/p/integration/composer.git /srv/composer \
     && rm -rf /srv/composer/.git \
     && ln -s /srv/composer/vendor/bin/composer /usr/local/bin/composer
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}

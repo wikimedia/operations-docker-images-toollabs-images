@@ -1,3 +1,4 @@
+{%- import 'macros.jinja2' as macros -%}
 # Base jessie user image
 # Name: docker-registry.tools.wmflabs.org/toolforge-jessie
 # Source image: Debian Jessie
@@ -12,13 +13,13 @@ ADD backports.list /etc/apt/sources.list.d/backports.list
 ADD 01checkvaliduntil /etc/apt/apt.conf.d/01checkvaliduntil
 
 # Add https apt transport support for deb-tools.wmflabs.org
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes --no-install-recommends \
-    apt-transport-https \
-    ca-certificates \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "apt-transport-https",
+        "ca-certificates",
+    ],
+    apt_options="--no-install-recommends",
+) }}
 
 # Add tools debian repo to this container
 ADD tools.list /etc/apt/sources.list.d/tools.list
@@ -37,22 +38,22 @@ RUN apt-get update \
 
 # Some packages that pretty much everyone needs.
 # Be conservative, and do not include things that are language specific!
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes --no-install-recommends \
-    curl \
-    emacs \
-    gawk \
-    git \
-    jq \
-    less \
-    libnss-sss \
-    locales \
-    nano \
-    sed \
-    vim \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "curl",
+        "emacs",
+        "gawk",
+        "git",
+        "jq",
+        "less",
+        "libnss-sss",
+        "locales",
+        "nano",
+        "sed",
+        "vim",
+    ],
+    apt_options="--no-install-recommends",
+) }}
 
 # Setup NSS with LDAP. This requires that we mount /var/lib/sss/pipes from
 # the underlying cloud host to the container. If not mounted, it will fallback
@@ -66,3 +67,4 @@ RUN dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=en_US.UTF-8
 
 ENV LC_ALL en_US.UTF-8
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}

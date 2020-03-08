@@ -1,3 +1,4 @@
+{%- import 'macros.jinja2' as macros -%}
 # Toolforge NodeJS 10 runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-node10-sssd-base
 FROM {{registry}}/{{image_prefix}}-stretch-sssd:{{tag}}
@@ -7,14 +8,13 @@ ADD node10.list /etc/apt/sources.list.d/node10.list
 # Includes *-dev packages needed for installing popular packages.
 # Each needs a ticket filed under T140110 and tracking here:
 # * T169338: libicu-dev
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --yes \
-    build-essential \
-    libicu-dev \
-    nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{{ macros.apt_install(
+    [
+        "build-essential",
+        "libicu-dev",
+        "nodejs",
+    ]
+) }}
 
 # npm 6.5.0
 RUN git clone \
@@ -23,3 +23,4 @@ RUN git clone \
     && git reset --hard 6d41d68fa32b54801ebe5e9708fc0095d1c9076d \
     && rm -rf /srv/npm/.git \
     && ln -s /srv/npm/bin/npm-cli.js /usr/bin/npm
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
