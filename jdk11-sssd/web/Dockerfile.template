@@ -1,6 +1,6 @@
 # Toolforge Java webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-jdk11-sssd-web
-FROM {registry}/{image_prefix}-jdk11-sssd-base:{tag}
+FROM {{registry}}/{{image_prefix}}-jdk11-sssd-base:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

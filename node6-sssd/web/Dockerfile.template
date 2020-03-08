@@ -1,6 +1,6 @@
 # Toolforge NodeJS webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-node6-sssd-web
-FROM {registry}/{image_prefix}-node6-sssd-base:{tag}
+FROM {{registry}}/{{image_prefix}}-node6-sssd-base:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

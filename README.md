@@ -1,12 +1,16 @@
-Tool Labs Images
+Toolforge Images
 ================
 
-Docker image configuration and management for Wikimedia Tool Labs.
+Docker image configuration and management for Wikimedia Toolforge.
 
 
 Usage
 -----
 ```
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install -U pip
+$ pip install -U -r requirements.txt
 $ ./build.py --push php/web
 ```
 

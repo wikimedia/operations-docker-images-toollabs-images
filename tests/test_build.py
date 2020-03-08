@@ -60,14 +60,3 @@ def test_lineage_of():
 )
 def test_make_docker_tag(expect, args):
     assert build.make_docker_tag(*args) == expect
-
-
-def test_expand_template():
-    template = "foo:{foo}\nbar:{bar}"
-    assert (
-        build.expand_template(template, {"foo": 1, "bar": 2}) == "foo:1\nbar:2"
-    )
-    assert (
-        build.expand_template(template, {"foo": 1, "bar": 2, "baz": 3})
-        == "foo:1\nbar:2"
-    )

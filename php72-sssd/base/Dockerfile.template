@@ -1,6 +1,6 @@
 # Toolforge PHP runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-php72-sssd-base
-FROM {registry}/{image_prefix}-stretch-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-stretch-sssd:{{tag}}
 
 # Missing packages compared to php5.6:
 # * ereg, mcrypt, mysql (removed upstream)

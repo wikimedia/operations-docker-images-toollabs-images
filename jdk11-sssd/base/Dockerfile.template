@@ -1,6 +1,6 @@
 # Toolforge Java runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-jdk11-sssd-base
-FROM {registry}/{image_prefix}-buster-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-buster-sssd:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

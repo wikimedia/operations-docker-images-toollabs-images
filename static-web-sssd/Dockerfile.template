@@ -1,6 +1,6 @@
 # Toolforge lighttpd based Static File Server
 # Name: docker-registry.tools.wmflabs.org/toolforge-static-web
-FROM {registry}/{image_prefix}-jessie-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

@@ -1,6 +1,6 @@
 # Toolforge Golang runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-golang-sssd-base
-FROM {registry}/{image_prefix}-stretch-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-stretch-sssd:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

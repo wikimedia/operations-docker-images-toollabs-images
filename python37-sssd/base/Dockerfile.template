@@ -1,6 +1,6 @@
 # Toolforge Python3.5 runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-python37-sssd-base
-FROM {registry}/{image_prefix}-buster-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-buster-sssd:{{tag}}
 
 # Includes *-dev packages needed for installing popular python packages,
 # until they ship with manylinux wheels.

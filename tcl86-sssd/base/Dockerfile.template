@@ -1,6 +1,6 @@
 # Toolforge tcl runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-tcl86-sssd-base
-FROM {registry}/{image_prefix}-stretch-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-stretch-sssd:{{tag}}
 
 # Bugs T58995
 RUN apt-get update \

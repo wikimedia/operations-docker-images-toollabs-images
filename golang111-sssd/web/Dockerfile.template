@@ -1,6 +1,6 @@
 # Toolforge Golang webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-golang111-sssd-web
-FROM {registry}/{image_prefix}-golang111-sssd-base:{tag}
+FROM {{registry}}/{{image_prefix}}-golang111-sssd-base:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

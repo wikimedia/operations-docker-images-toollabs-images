@@ -1,6 +1,6 @@
 # Toolforge Python3 runtime image
 # Name: docker-registry.tools.wmflabs.org/toolforge-python34-sssd-base
-FROM {registry}/{image_prefix}-jessie-sssd:{tag}
+FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
 
 # Includes *-dev packages needed for installing popular python packages,
 # until they ship with manylinux wheels.

@@ -1,7 +1,8 @@
 *.py[cod]
+/.idea
 /.python-version
 /.tox
 /.vagrant
+/.venv
 __pycache__/
 Dockerfile
-/.idea

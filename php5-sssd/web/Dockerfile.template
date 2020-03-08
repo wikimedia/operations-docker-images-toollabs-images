@@ -1,6 +1,6 @@
 # Toolforge PHP webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-php5-sssd-web
-FROM {registry}/{image_prefix}-php5-sssd-base:{tag}
+FROM {{registry}}/{{image_prefix}}-php5-sssd-base:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

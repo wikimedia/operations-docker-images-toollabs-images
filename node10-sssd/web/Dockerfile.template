@@ -1,6 +1,6 @@
 # Toolforge NodeJS 10 webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-node10-sssd-web
-FROM {registry}/{image_prefix}-node10-sssd-base:{tag}
+FROM {{registry}}/{{image_prefix}}-node10-sssd-base:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

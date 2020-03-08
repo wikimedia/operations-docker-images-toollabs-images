@@ -1,6 +1,6 @@
 # Toolforge PHP 7.3 webserver image
 # Name: docker-registry.tools.wmflabs.org/toolforge-php73-sssd-web
-FROM {registry}/{image_prefix}-php73-sssd-base:{tag}
+FROM {{registry}}/{{image_prefix}}-php73-sssd-base:{{tag}}
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \

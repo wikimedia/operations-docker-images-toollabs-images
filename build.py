@@ -8,6 +8,8 @@ import itertools
 import os
 import subprocess
 
+import jinja2
+
 
 # The docker binary to use for executing commands
 DOCKER_BINARY = os.environ.get("DOCKER_BINARY", "/usr/bin/docker")
@@ -59,22 +61,23 @@ def make_docker_tag(name, registry, image_prefix, tag):
     )
 
 
-def make_dockerfile(name, registry, image_prefix, tag):
-    image_dir = os.path.join(BASE_PATH, name)
-    template_file = os.path.join(image_dir, "Dockerfile.template")
-    out_file = os.path.join(image_dir, "Dockerfile")
-    kwargs = {"registry": registry, "image_prefix": image_prefix, "tag": tag}
-    with open(template_file, "rt") as f_in:
-        with open(out_file, "wt") as f_out:
-            for line in f_in:
-                f_out.write(expand_template(line, kwargs))
+def make_dockerfile(name, registry, image_prefix, tag, jinja_env):
+    ctx = {"registry": registry, "image_prefix": image_prefix, "tag": tag}
+    tmpl = jinja_env.get_template("{}/Dockerfile.template".format(name))
+    dockerfile = tmpl.render(**ctx)
+    if dockerfile is None:
+        raise RuntimeError("Generated empty Dockerfile for {}".format(name))
+
+    out_file = os.path.join(BASE_PATH, name, "Dockerfile")
+    with open(out_file, "wt") as f_out:
+        f_out.write(dockerfile)
 
 
 def rm_dockerfile(name):
     os.unlink(os.path.join(BASE_PATH, name, "Dockerfile"))
 
 
-def build_image(name, registry, image_prefix, no_cache, tag):
+def build_image(name, registry, image_prefix, no_cache, tag, jinja_env):
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
     print(
         "\x1b[32m  Building {}/{}-{}:{}\x1b[0m".format(
@@ -82,7 +85,7 @@ def build_image(name, registry, image_prefix, no_cache, tag):
         )
     )
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
-    make_dockerfile(name, registry, image_prefix, tag)
+    make_dockerfile(name, registry, image_prefix, tag, jinja_env)
     args = [
         DOCKER_BINARY,
         "build",
@@ -130,10 +133,6 @@ def lineage_of(name):
         return None
 
     return ancestors_of(IMAGES, [])
-
-
-def expand_template(template, params):
-    return template.format(**params)
 
 
 def main():
@@ -194,6 +193,11 @@ def main():
         images = lineage_of(args.image)
     print("Building following images: ", images)
 
+    # Setup template engine
+    jinja_env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(BASE_PATH),
+    )
+
     # Separate build and push step so we do not push images if
     # any of them fail
     for image in images:
@@ -203,6 +207,7 @@ def main():
             args.image_prefix,
             args.no_cache,
             args.tag,
+            jinja_env,
         )
 
     if args.push:
