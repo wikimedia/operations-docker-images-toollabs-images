@@ -17,10 +17,5 @@ ADD node10.list /etc/apt/sources.list.d/node10.list
 ) }}
 
 # npm 6.5.0
-RUN git clone \
-    https://gerrit.wikimedia.org/r/p/integration/npm.git /srv/npm \
-    && cd /srv/npm \
-    && git reset --hard 6d41d68fa32b54801ebe5e9708fc0095d1c9076d \
-    && rm -rf /srv/npm/.git \
-    && ln -s /srv/npm/bin/npm-cli.js /usr/bin/npm
+{{ macros.integration_npm("6d41d68fa32b54801ebe5e9708fc0095d1c9076d") }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

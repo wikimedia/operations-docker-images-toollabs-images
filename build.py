@@ -196,6 +196,8 @@ def main():
     # Setup template engine
     jinja_env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(BASE_PATH),
+        trim_blocks=True,
+        lstrip_blocks=True,
     )
 
     # Separate build and push step so we do not push images if
