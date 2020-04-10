@@ -15,7 +15,11 @@ clean_docker_layers () {
 for series in jessie-sssd stretch-sssd buster-sssd; do
     # Images for the 2020 k8s cluster
     echo "=== START toolforge ${series} ==="
+    # Build and push the base image first.
+    ${PYTHON:-python3} build.py --image-prefix toolforge --tag latest --no-cache --push --single $series ${@}
+    # Build and push all dependent images.
     ${PYTHON:-python3} build.py --image-prefix toolforge --tag latest --no-cache --push $series ${@}
+    # Clean layers, but ignore errors because the cleaner is a bit sketchy
     clean_docker_layers || /bin/true
     echo "=== END toolforge ${series} ==="
 done
