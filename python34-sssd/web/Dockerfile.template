@@ -8,7 +8,8 @@ FROM {{registry}}/{{image_prefix}}-python34-sssd-base:{{tag}}
         "toollabs-webservice",
         "uwsgi",
         "uwsgi-plugin-python3",
-    ]
+    ],
+    apt_options="--force-yes"
 ) }}
 
 COPY webservice-python-bootstrap /usr/local/bin/

@@ -18,7 +18,8 @@ FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
         "php5-sqlite",
         "php5-xdebug",
         "php5-xsl",
-    ]
+    ],
+    apt_options="--force-yes"
 ) }}
 
 # T172358 - install composer simlarly to ::toollabs::composer

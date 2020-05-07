@@ -26,6 +26,7 @@ FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
         "python3-venv",
         "python3-virtualenv",
         "zlib1g-dev",
-    ]
+    ],
+    apt_options="--force-yes"
 ) }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

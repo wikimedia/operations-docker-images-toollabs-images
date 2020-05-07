@@ -8,6 +8,7 @@ FROM {{registry}}/{{image_prefix}}-python2-sssd-base:{{tag}}
         "toollabs-webservice",
         "uwsgi",
         "uwsgi-plugin-python",
-    ]
+    ],
+    apt_options="--force-yes"
 ) }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

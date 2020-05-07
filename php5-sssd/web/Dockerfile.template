@@ -9,7 +9,8 @@ FROM {{registry}}/{{image_prefix}}-php5-sssd-base:{{tag}}
         "lighttpd",
         "php5-cgi",
         "toollabs-webservice",
-    ]
+    ],
+    apt_options="--force-yes"
 ) }}
 
 # This is where lighttpd puts its config files.

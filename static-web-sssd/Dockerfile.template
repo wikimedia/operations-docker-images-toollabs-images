@@ -7,7 +7,8 @@ FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
     [
         "lighttpd",
         "toollabs-webservice",
-    ]
+    ],
+    apt_options="--force-yes"
 ) }}
 
 # This is where lighttpd puts its config files.

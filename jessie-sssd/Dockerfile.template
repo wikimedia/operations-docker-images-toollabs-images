@@ -18,7 +18,7 @@ ADD 01checkvaliduntil /etc/apt/apt.conf.d/01checkvaliduntil
         "apt-transport-https",
         "ca-certificates",
     ],
-    apt_options="--no-install-recommends",
+    apt_options="--no-install-recommends --force-yes",
 ) }}
 
 # Add tools debian repo to this container
@@ -27,7 +27,7 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
 # HACK: downgrade some packages from the upstream image that are no longer
 # available since the removal of the jessie-backports repo.
 RUN apt-get update \
-    && yes | apt-get install \
+    && yes | apt-get install --force-yes \
     gcc-4.9-base=4.9.2-10+deb8u1 \
     libbz2-1.0=1.0.6-7+b3 \
     libgcc1=1:4.9.2-10+deb8u1 \
@@ -53,7 +53,7 @@ RUN apt-get update \
         "sed",
         "vim",
     ],
-    apt_options="--no-install-recommends",
+    apt_options="--no-install-recommends --force-yes",
 ) }}
 
 # Setup NSS with LDAP. This requires that we mount /var/lib/sss/pipes from
