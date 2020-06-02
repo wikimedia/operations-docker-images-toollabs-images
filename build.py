@@ -26,7 +26,6 @@ IMAGES = {
     "jessie-sssd": {
         "python2-sssd/base": ["python2-sssd/web"],
         "php5-sssd/base": ["php5-sssd/web"],
-        "static-web-sssd": [],
         "node6-sssd/base": ["node6-sssd/web"],
         "python34-sssd/base": ["python34-sssd/web"],
         "ruby21-sssd/base": ["ruby21-sssd/web"],
