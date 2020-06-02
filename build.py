@@ -44,6 +44,7 @@ IMAGES = {
         "php73-sssd/base": ["php73-sssd/web"],
         "python37-sssd/base": ["python37-sssd/web"],
         "ruby25-sssd/base": ["ruby25-sssd/web"],
+        "html-sssd/web": [],
     },
 }
 
