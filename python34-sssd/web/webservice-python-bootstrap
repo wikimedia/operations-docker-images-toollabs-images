@@ -27,7 +27,7 @@ def main():
         run(["python3", "-m", "venv", venv])
 
     pip = os.path.join(venv, "bin/pip")
-    run([pip, "install", "--upgrade", "pip"])
+    run([pip, "install", "--upgrade", "pip", "wheel"])
     requirements = os.path.expanduser("~/www/python/src/requirements.txt")
     if os.path.isfile(requirements):
         run([pip, "install", "-r", requirements])
