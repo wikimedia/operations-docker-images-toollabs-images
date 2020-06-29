@@ -1,0 +1,17 @@
+{%- import 'macros.jinja2' as macros -%}
+# Toolforge HTML webserver image
+# Name: docker-registry.tools.wmflabs.org/toolforge-html-sssd-web
+FROM {{registry}}/{{image_prefix}}-buster-sssd:{{tag}}
+
+{{ macros.apt_install(
+    [
+        "toollabs-webservice",
+        "lighttpd",
+    ]
+) }}
+
+# This is where lighttpd puts its config files.
+# Very unideal, but let's stick to same places as
+# the gridengine for right now
+RUN mkdir /var/run/lighttpd/ && chmod 0777 /var/run/lighttpd/
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
