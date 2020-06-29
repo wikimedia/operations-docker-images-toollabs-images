@@ -12,7 +12,7 @@ clean_docker_layers () {
         xargs --no-run-if-empty docker rmi
 }
 
-for series in jessie-sssd stretch-sssd buster-sssd; do
+for series in buster-sssd stretch-sssd jessie-sssd; do
     # Images for the 2020 k8s cluster
     echo "=== START toolforge ${series} ==="
     # Build and push the base image first.
