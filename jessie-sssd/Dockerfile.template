@@ -5,7 +5,7 @@
 # Sets up:
 #   Extra Apt repo: Tools repo
 #   Users and Groups from labs LDAP (with mount required for sssd)
-FROM docker-registry.wikimedia.org/wikimedia-jessie
+FROM docker-registry.tools.wmflabs.org/wikimedia-jessie
 
 # Fix up apt config for ancient jessie usage
 ADD sources.list /etc/apt/sources.list
