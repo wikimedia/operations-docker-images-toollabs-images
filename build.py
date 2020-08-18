@@ -42,7 +42,7 @@ IMAGES = {
         "golang111-sssd/base": ["golang111-sssd/web"],
         "jdk11-sssd/base": ["jdk11-sssd/web"],
         "php73-sssd/base": ["php73-sssd/web"],
-        "python37-sssd/base": ["python37-sssd/web"],
+        "python37-sssd/base": ["python37-sssd/web", "python37-sssd/pwb"],
         "ruby25-sssd/base": ["ruby25-sssd/web"],
         "html-sssd/web": [],
     },

@@ -5,7 +5,7 @@
  # @param str apt_options Additional options to pass to `apt-get install`
  #}
 {% macro apt_install(pkgs, apt_options='') %}
-RUN apt-get update \
+RUN apt-get clean && apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install {{ apt_options }} --yes \
     {%+ for pkg in pkgs %}
@@ -22,9 +22,16 @@ RUN apt-get update \
  # @param str target Target directory for clone
  # @param str branch Tree'ish to checkout. None for HEAD (default).
  # @param bool continue End RUN block with a line continuation character
+ # @param bool recursive Recursive clone (submodules)
  #}
-{% macro git_clone(repo, target, branch=None, continue=False) %}
-RUN git clone {% if not branch %}--depth 1{% endif %} \
+{% macro git_clone(
+    repo,
+    target,
+    branch=None,
+    continue=False,
+    recursive=False
+) %}
+RUN git clone {% if recursive %}--recursive {% endif %}{% if not branch %}--depth 1 {% endif %}\
       {{repo}} \
       {{target}} \
     {% if branch %}
