@@ -7,10 +7,9 @@
 #   Users and Groups from labs LDAP (with mount required for sssd)
 FROM docker-registry.wikimedia.org/wikimedia-buster
 
-# Add https apt transport support for deb-tools.wmflabs.org
+# Add certs for apt to use HTTPS for deb-tools.wmflabs.org
 {{ macros.apt_install(
     [
-        "apt-transport-https",
         "ca-certificates",
     ],
     apt_options="--no-install-recommends",
