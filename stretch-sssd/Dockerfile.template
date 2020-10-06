@@ -30,7 +30,7 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
         "jq",
         "less",
         "libnss-sss",
-        "locales",
+        "locales-all",
         "nano",
         "sed",
         "vim",
@@ -45,9 +45,7 @@ ADD nsswitch.conf /etc/nsswitch.conf
 
 # Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
 # (which sucks!) Cultural imperialism, etc
-ADD locales-extended /etc/locale.gen
-RUN dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=en_US.UTF-8
+RUN update-locale LANG=en_US.UTF-8
 
 ENV LC_ALL en_US.UTF-8
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
