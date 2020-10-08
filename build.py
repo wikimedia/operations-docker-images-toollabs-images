@@ -46,6 +46,8 @@ IMAGES = {
         "ruby25-sssd/base": ["ruby25-sssd/web"],
         "html-sssd/web": [],
     },
+    # buildpack stacks
+    "buster0/base": ["buster0/build", "buster0/run"],
 }
 
 # Unbuffer print output (https://stackoverflow.com/a/40161931/8171)
