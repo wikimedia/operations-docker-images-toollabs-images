@@ -30,6 +30,7 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
         "jq",
         "less",
         "libnss-sss",
+        "locales",
         "locales-all",
         "nano",
         "sed",

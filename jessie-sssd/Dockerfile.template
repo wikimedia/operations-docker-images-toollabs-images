@@ -48,6 +48,7 @@ RUN apt-get update \
         "jq",
         "less",
         "libnss-sss",
+        "locales",
         "locales-all",
         "nano",
         "sed",
