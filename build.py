@@ -46,6 +46,7 @@ IMAGES = {
         "ruby25-sssd/base": ["ruby25-sssd/web"],
         "html-sssd/web": [],
     },
+    "buster-standalone": [],
     # buildpack stacks
     "buster0/base": ["buster0/build", "buster0/run"],
 }

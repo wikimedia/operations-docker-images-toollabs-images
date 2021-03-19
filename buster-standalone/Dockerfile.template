@@ -1,0 +1,36 @@
+{%- import 'macros.jinja2' as macros -%}
+# Stripped down toolforge buster user image for binary webservices
+# Name: docker-registry.tools.wmflabs.org/toolforge-buster-standalone
+# Source image: Debian Buster
+# Sets up:
+#   Extra Apt repo: Tools repo
+#   Users and Groups from labs LDAP (with mount required for sssd)
+FROM docker-registry.wikimedia.org/wikimedia-buster
+
+
+# Unlike other images, this is a minimal set of packages for statically compiled
+# programs.
+# T277749 - Rust progs still tend to link to the libmariadb3 and libssl1.1
+{{ macros.apt_install(
+    [
+        "ca-certificates",
+        "libnss-sss",
+        "locales",
+        "locales-all",
+        "libmariadb3",
+        "libssl1.1",
+    ],
+    apt_options="--no-install-recommends",
+) }}
+
+# Setup NSS with LDAP/SSSD. This requires that we mount /var/lib/sss/pipes from
+# the underlying cloud host to the container. If not mounted, it will fallback
+# gracefully and just not use LDAP for NSS.
+ADD nsswitch.conf /etc/nsswitch.conf
+
+# Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
+# (which sucks!) Cultural imperialism, etc
+RUN update-locale LANG=en_US.UTF-8
+
+ENV LC_ALL en_US.UTF-8
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
