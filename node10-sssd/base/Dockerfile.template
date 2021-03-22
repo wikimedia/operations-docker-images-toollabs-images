@@ -16,6 +16,6 @@ ADD node10.list /etc/apt/sources.list.d/node10.list
     ]
 ) }}
 
-# npm 6.5.0
-{{ macros.integration_npm("6d41d68fa32b54801ebe5e9708fc0095d1c9076d") }}
+# npm 6.14.5
+{{ macros.integration_npm("494fdc273a2c1bc8f26c99903da06aa8c1a9b92a") }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
