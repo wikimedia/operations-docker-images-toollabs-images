@@ -1,1 +1,1 @@
-deb [trusted=yes] https://deb-tools.wmflabs.org/repo stretch-tools main
+deb [trusted=yes] https://deb-tools.wmcloud.org/repo stretch-tools main

@@ -12,7 +12,7 @@ ADD sources.list /etc/apt/sources.list
 ADD backports.list /etc/apt/sources.list.d/backports.list
 ADD 01checkvaliduntil /etc/apt/apt.conf.d/01checkvaliduntil
 
-# Add https apt transport support for deb-tools.wmflabs.org
+# Add https apt transport support for deb-tools.wmcloud.org
 {{ macros.apt_install(
     [
         "apt-transport-https",
