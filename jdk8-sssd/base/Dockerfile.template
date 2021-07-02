@@ -3,10 +3,12 @@
 # Name: docker-registry.tools.wmflabs.org/toolforge-jdk8-sssd-base
 FROM {{registry}}/{{image_prefix}}-stretch-sssd:{{tag}}
 
+RUN mkdir -p /usr/share/man/man1  # The day it works without this, remove this.
+
 {{ macros.apt_install(
     [
-        "maven",
         "openjdk-8-jdk",
+        "maven",
     ]
 ) }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
