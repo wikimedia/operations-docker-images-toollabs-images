@@ -1,10 +1,10 @@
 {%- import 'macros.jinja2' as macros -%}
-# Stripped down toolforge buster user image for binary webservices
-# Name: docker-registry.tools.wmflabs.org/toolforge-buster-standalone
-# Source image: Debian Buster
+# Stripped down toolforge bullseye user image for binary webservices
+# Name: docker-registry.tools.wmflabs.org/toolforge-bullseye-standalone
+# Source image: Debian Bullseye
 # Sets up:
-#   Users and Groups from labs LDAP (with mount required for sssd)
-FROM docker-registry.wikimedia.org/wikimedia-buster
+#   Users and Groups from WMCS LDAP (with mount required for sssd)
+FROM docker-registry.wikimedia.org/bullseye
 
 
 # Unlike other images, this is a minimal set of packages for statically compiled

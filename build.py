@@ -47,6 +47,13 @@ IMAGES = {
         "html-sssd/web": [],
     },
     "buster-standalone": [],
+    "bullseye-sssd": {
+        "jdk17-sssd/base": ["jdk17-sssd/web"],
+        "php74-sssd/base": ["php74-sssd/web"],
+        "python39-sssd/base": ["python39-sssd/web", "python39-sssd/pwb"],
+        "ruby27-sssd/base": ["ruby27-sssd/web"],
+    },
+    "bullseye-standalone": [],
     # buildpack stacks
     "buster0/base": ["buster0/build", "buster0/run"],
 }

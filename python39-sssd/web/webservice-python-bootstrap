@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+import argparse
+import os
+import shutil
+import subprocess
+
+
+def run(args):
+    print("$ " + " ".join(args))
+    subprocess.check_call(args)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Bootstrap a Python webservice tool"
+    )
+    parser.add_argument(
+        "--fresh", help="Create a fresh virtualenv", action="store_true"
+    )
+    args = parser.parse_args()
+
+    venv = os.path.expanduser("~/www/python/venv")
+    if os.path.isdir(venv) and args.fresh:
+        print("$ rm -rf {}".format(venv))
+        shutil.rmtree(venv)
+    if not os.path.isdir(venv):
+        run(["python3", "-m", "venv", venv])
+
+    pip = os.path.join(venv, "bin/pip")
+    run([pip, "install", "--upgrade", "pip", "wheel"])
+    requirements = os.path.expanduser("~/www/python/src/requirements.txt")
+    if os.path.isfile(requirements):
+        run([pip, "install", "-r", requirements])
+
+
+if __name__ == "__main__":
+    main()
