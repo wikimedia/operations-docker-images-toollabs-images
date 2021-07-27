@@ -7,6 +7,7 @@ FROM {{registry}}/{{image_prefix}}-php72-sssd-base:{{tag}}
     [
         "lighttpd",
         "php7.2-cgi",
+        "python",
         "toollabs-webservice",
     ]
 ) }}
