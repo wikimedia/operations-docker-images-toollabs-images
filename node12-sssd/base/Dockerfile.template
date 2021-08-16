@@ -1,0 +1,19 @@
+{%- import 'macros.jinja2' as macros -%}
+# Toolforge NodeJS 12 runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-node12-sssd-base
+FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
+
+# Includes *-dev packages needed for installing popular packages.
+# Each needs a ticket filed under T140110 and tracking here:
+# * T169338: libicu-dev
+{{ macros.apt_install(
+    [
+        "build-essential",
+        "libicu-dev",
+        "nodejs",
+    ]
+) }}
+
+# npm 6.14.5
+{{ macros.integration_npm("494fdc273a2c1bc8f26c99903da06aa8c1a9b92a") }}
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
