@@ -3,8 +3,10 @@
 # Name: docker-registry.tools.wmflabs.org/toolforge-php74-sssd-base
 FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
 
+# Unzip improves composer's handling of certain zip features (unix permissions for example)
 {{ macros.apt_install(
     [
+        "composer",
         "librsvg2-bin",
         "php-apcu",
         "php-apcu-bc",
@@ -25,9 +27,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "php7.4-sqlite3",
         "php7.4-xsl",
         "php7.4-zip",
+        "unzip",
     ]
 ) }}
-
-# T172358 - install composer simlarly to ::toollabs::composer
-{{ macros.integration_composer() }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
