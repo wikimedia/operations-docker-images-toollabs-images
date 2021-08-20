@@ -11,9 +11,8 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "build-essential",
         "libicu-dev",
         "nodejs",
+        "npm",
     ]
 ) }}
 
-# npm 6.14.5
-{{ macros.integration_npm("494fdc273a2c1bc8f26c99903da06aa8c1a9b92a") }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
