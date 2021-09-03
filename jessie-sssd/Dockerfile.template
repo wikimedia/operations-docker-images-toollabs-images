@@ -42,7 +42,7 @@ RUN apt-get update \
 {{ macros.apt_install(
     [
         "curl",
-        "emacs",
+        "emacs-nox",
         "gawk",
         "git",
         "jq",

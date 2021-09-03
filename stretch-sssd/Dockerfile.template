@@ -27,7 +27,7 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
 {{ macros.apt_install(
     [
         "curl",
-        "emacs",
+        "emacs-nox",
         "gawk",
         "git",
         "jq",
