@@ -12,7 +12,10 @@ FROM {{registry}}/{{image_prefix}}-jessie-sssd:{{tag}}
         "libicu-dev",
         "nodejs-legacy",
         "npm",
+        "yarnpkg",
     ],
     apt_options="--force-yes"
 ) }}
+
+RUN ln -s /usr/bin/yarnpkg /usr/bin/yarn
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
