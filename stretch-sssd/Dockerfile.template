@@ -12,6 +12,9 @@ FROM docker-registry.wikimedia.org/wikimedia-stretch
     [
         "apt-transport-https",
         "ca-certificates",
+        "openssl",
+        "libgnutls30",
+
     ],
     apt_options="--no-install-recommends",
 ) }}
