@@ -8,7 +8,7 @@ FROM {{registry}}/{{image_prefix}}-php74-sssd-base:{{tag}}
         "lighttpd",
         "lighttpd-mod-openssl",
         "php7.4-cgi",
-        "toollabs-webservice",
+        "toolforge-webservice",
     ]
 ) }}
 

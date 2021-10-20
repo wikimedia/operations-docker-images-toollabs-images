@@ -5,7 +5,7 @@ FROM {{registry}}/{{image_prefix}}-golang111-sssd-base:{{tag}}
 
 {{ macros.apt_install(
     [
-        "toollabs-webservice",
+        "toolforge-webservice",
     ]
 ) }}
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

@@ -5,7 +5,7 @@ FROM {{registry}}/{{image_prefix}}-buster-sssd:{{tag}}
 
 {{ macros.apt_install(
     [
-        "toollabs-webservice",
+        "toolforge-webservice",
         "lighttpd",
     ]
 ) }}

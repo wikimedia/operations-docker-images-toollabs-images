@@ -5,7 +5,7 @@ FROM {{registry}}/{{image_prefix}}-python35-sssd-base:{{tag}}
 
 {{ macros.apt_install(
     [
-        "toollabs-webservice",
+        "toolforge-webservice",
         "uwsgi",
         "uwsgi-plugin-python3",
     ]

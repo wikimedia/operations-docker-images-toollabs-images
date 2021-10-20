@@ -7,7 +7,7 @@ FROM {{registry}}/{{image_prefix}}-tcl86-sssd-base:{{tag}}
     [
         "libfcgi-dev",
         "lighttpd",
-        "toollabs-webservice",
+        "toolforge-webservice",
     ]
 ) }}
 
