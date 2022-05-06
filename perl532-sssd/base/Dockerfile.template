@@ -46,6 +46,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "libirc-utils-perl",
         "libjson-perl",
         "libjson-xs-perl",
+        "liblocale-codes-perl",
         "liblog-log4perl-perl",
         "liblwp-protocol-https-perl",
         "libmediawiki-api-perl",
