@@ -1,0 +1,32 @@
+{%- import 'macros.jinja2' as macros -%}
+# Toolforge NodeJS 16 runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-node16-sssd-base
+FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
+
+# If you are creating a newer nodejs image: please copy node12 instead of this one.
+
+# NodeSource repo mirrors, since Bullseye ships a really old version (12)
+# This image should be retired once Bullseye+1 ships with node 18+
+ADD node16.list /etc/apt/sources.list.d/node16.list
+
+# Includes *-dev packages needed for installing popular packages.
+# Each needs a ticket filed under T140110 and tracking here:
+# * T169338: libicu-dev
+{{ macros.apt_install(
+    [
+        "build-essential",
+        "libicu-dev",
+        "nodejs",
+    ]
+) }}
+
+# Disable NPM update check since it's annoying.
+# The packages provided by Debian seem to do this automatically.
+RUN npm config set update-notifier false
+
+# Install yarn via npm, since the deb version in Bullseye
+# doesn't work with nodesource packages.
+# Pinned since I don't trust it to not break if I don't pin it.
+RUN npm install -g yarn@1.22.19
+
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
