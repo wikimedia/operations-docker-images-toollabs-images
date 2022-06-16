@@ -34,6 +34,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "libdigest-crc-perl",
         "libdigest-hmac-perl",
         "libfile-nfslock-perl",
+        "libfile-slurp-perl",
         "libgd-perl",
         "libhtml-format-perl",
         "libhtml-html5-entities-perl",
