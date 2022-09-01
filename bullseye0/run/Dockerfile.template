@@ -1,0 +1,11 @@
+{%- import 'macros.jinja2' as macros -%}
+# Run image for the Toolforge bullseye0 buildpacks
+# Name: docker-registry.tools.wmflabs.org/toolforge-bullseye0-run
+# Sets up:
+#   Whatever is needed at runtime by everything
+FROM {{registry}}/{{image_prefix}}-bullseye0-base:{{tag}}
+
+USER tfb
+
+{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+

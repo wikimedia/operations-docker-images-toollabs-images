@@ -59,6 +59,7 @@ IMAGES = {
     "bullseye-standalone": [],
     # buildpack stacks
     "buster0/base": ["buster0/build", "buster0/run"],
+    "bullseye0/base": ["bullseye0/build", "bullseye0/run"],
 }
 
 # Unbuffer print output (https://stackoverflow.com/a/40161931/8171)
