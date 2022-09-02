@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # (C) Heroku, MIT license
 # forked from <https://github.com/heroku/heroku-buildpack-apt>
-# bin/compile <build-dir> <cache-dir>
+# bin/install-packages <build-dir> <cache-dir>
 
 # fail fast
-set -e
+set -o errexit
 
 # debug
 # set -x
@@ -13,7 +13,7 @@ set -e
 BUILD_DIR=$1
 CACHE_DIR=$2
 # LP_DIR=`cd $(dirname $0); cd ..; pwd`
-LP_DIR=`pwd`
+LP_DIR=$PWD
 
 function error() {
   echo " !     $*" >&2
@@ -25,15 +25,11 @@ function topic() {
 }
 
 function indent() {
-  c='s/^/       /'
-  case $(uname) in
-    Darwin) sed -l "$c";;
-    *)      sed -u "$c";;
-  esac
+  sed -u 's/^/       /'
 }
 
 # Store which STACK we are running on in the cache to bust the cache if it changes
-if [ -f $CACHE_DIR/.apt/STACK ]; then
+if [[ -f "$CACHE_DIR/.apt/STACK" ]]; then
   CACHED_STACK=$(cat "$CACHE_DIR/.apt/STACK")
 else
   CACHED_STACK=$STACK
@@ -56,13 +52,13 @@ case "$APT_VERSION" in
   *)         APT_FORCE_YES="--allow-downgrades --allow-remove-essential --allow-change-held-packages";;
 esac
 
-if [ -f $APT_CACHE_DIR/Aptfile ] && cmp -s $BUILD_DIR/Aptfile $APT_CACHE_DIR/Aptfile && [[ $CACHED_STACK == $STACK ]] ; then
+if [[ -f $APT_CACHE_DIR/Aptfile ]] && cmp -s "$BUILD_DIR/Aptfile" "$APT_CACHE_DIR/Aptfile" && [[ "$CACHED_STACK" == "$STACK" ]] ; then
   # Old Aptfile is the same as new and STACK has not changed
   topic "Reusing cache"
 else
   # Aptfile changed or does not exist or STACK changed
   topic "Detected Aptfile or Stack changes, flushing cache"
-  rm -rf $APT_CACHE_DIR
+  rm -rf "$APT_CACHE_DIR"
   mkdir -p "$APT_CACHE_DIR/archives/partial"
   mkdir -p "$APT_STATE_DIR/lists/partial"
   mkdir -p "$APT_SOURCELIST_DIR"   # make dir for sources
@@ -71,7 +67,7 @@ else
   # add custom repositories from Aptfile to sources.list
   # like>>    :repo:deb http://cz.archive.ubuntu.com/ubuntu artful main universe
   topic "Adding custom repositories"
-  cat $BUILD_DIR/Aptfile | grep -s -e "^:repo:" | sed 's/^:repo:\(.*\)\s*$/\1/g' >> $APT_SOURCES
+  grep -s -e "^:repo:" "$BUILD_DIR/Aptfile" | sed 's/^:repo:\(.*\)\s*$/\1/g' >> "$APT_SOURCES"
 fi
 
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
@@ -79,31 +75,35 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 APT_OPTIONS="$APT_OPTIONS -o dir::etc::sourcelist=$APT_SOURCES -o dir::etc::sourceparts=/dev/null"
 
 topic "Updating apt caches"
+# shellcheck disable=SC2086
 apt-get $APT_OPTIONS update | indent
 
-for PACKAGE in $(cat $BUILD_DIR/Aptfile | grep -v -s -e '^#' | grep -v -s -e "^:repo:"); do
+grep -v -s -e '^#' "$BUILD_DIR/Aptfile" | grep -v -s -e '^:repo:'  | grep -v -s -e '^#' \
+| while read -r PACKAGE; do
   if [[ $PACKAGE == *deb ]]; then
-    PACKAGE_NAME=$(basename $PACKAGE .deb)
+    PACKAGE_NAME=$(basename "$PACKAGE" .deb)
     PACKAGE_FILE=$APT_CACHE_DIR/archives/$PACKAGE_NAME.deb
 
     topic "Fetching $PACKAGE"
-    curl -s -L -z $PACKAGE_FILE -o $PACKAGE_FILE $PACKAGE 2>&1 | indent
+    curl -s -L -z "$PACKAGE_FILE" -o "$PACKAGE_FILE" "$PACKAGE" 2>&1 | indent
   else
     topic "Fetching .debs for $PACKAGE"
-    apt-get $APT_OPTIONS -y $APT_FORCE_YES -d install --reinstall $PACKAGE | indent
+    # shellcheck disable=SC2086
+    apt-get $APT_OPTIONS -y $APT_FORCE_YES -d install --reinstall "$PACKAGE" | indent
   fi
 done
 
-mkdir -p $BUILD_DIR/.apt
+mkdir -p "$BUILD_DIR/.apt"
 
-for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
-  topic "Installing $(basename $DEB)"
-  dpkg -x $DEB $BUILD_DIR/.apt/
+find "$APT_CACHE_DIR"/archives -maxdepth 1 -and -iname \*.deb \
+| while read -r DEB; do
+  topic "Installing $(basename "$DEB")"
+  dpkg -x "$DEB" "$BUILD_DIR/.apt/"
 done
 
 topic "Writing profile script"
-mkdir -p $BUILD_DIR/.profile.d
-cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
+mkdir -p "$BUILD_DIR/.profile.d"
+cat <<EOF >"$BUILD_DIR/.profile.d/000_apt.sh"
 export PATH="\$HOME/.apt/usr/bin:\$HOME/.apt/usr/local/bin:\$PATH"
 export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$LD_LIBRARY_PATH"
 export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$LIBRARY_PATH"
@@ -122,9 +122,22 @@ export CPPPATH="$INCLUDE_PATH"
 export PKG_CONFIG_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 #give environment to later buildpacks
-export -p | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)=' >> "$LP_DIR/export"
-# shellcheck disable=SC2016
-echo 'echo "Loaded env vars (PATH|LD_LIBRARY_PATH|CPATH...) for custom apt installation from $0."' >> "$LP_DIR/export"
+cat <<EOF >"$LP_DIR/export"
+export PATH="$BUILD_DIR/.apt/usr/bin:$BUILD_DIR/.apt/usr/local/bin:\$PATH"
+export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
+export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib\${LIBRARY_PATH:+:\$LIBRARY_PATH}"
+export INCLUDE_PATH="$BUILD_DIR/.apt/usr/include:$BUILD_DIR/.apt/usr/include/x86_64-linux-gnu\${INCLUDE_PATH:+:\$INCLUDE_PATH}"
+export CPATH="\$INCLUDE_PATH"
+export CPPPATH="\$INCLUDE_PATH"
+echo "Loaded env vars for apt installation at $BUILD_DIR:"
+echo "  PATH=\$PATH"
+echo "  LD_LIBRARY_PATH=\$LD_LIBRARY_PATH"
+echo "  LIBRARY_PATH=\$LIBRARY_PATH"
+echo "  INCLUDE_PATH=\$INCLUDE_PATH"
+echo "  CPATH=\$CPATH"
+echo "  CPPPATH=\$CPPPATH"
+EOF
 
 topic "Rewrite package-config files"
-find $BUILD_DIR/.apt -type f -ipath '*/pkgconfig/*.pc' | xargs --no-run-if-empty -n 1 sed -i -e 's!^prefix=\(.*\)$!prefix='"$BUILD_DIR"'/.apt\1!g'
+find "$BUILD_DIR/.apt" -type f -ipath '*/pkgconfig/*.pc' -print0 \
+| xargs -0 --no-run-if-empty -n 1 sed -i -e 's!^prefix=\(.*\)$!prefix='"$BUILD_DIR"'/.apt\1!g'
