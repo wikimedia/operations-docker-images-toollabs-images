@@ -7,12 +7,13 @@ import functools
 import itertools
 import os
 import subprocess
+import shutil
 
 import jinja2
 
 
 # The docker binary to use for executing commands
-DOCKER_BINARY = os.environ.get("DOCKER_BINARY", "/usr/bin/docker")
+DOCKER_BINARY = os.environ.get("DOCKER_BINARY", shutil.which("docker"))
 # Base path of where the docker images are organized
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
