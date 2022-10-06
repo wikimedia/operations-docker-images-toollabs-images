@@ -4,7 +4,7 @@
 # Source image: Debian Bullseye
 # Sets up:
 #   Users and Groups from WMCS LDAP (with mount required for sssd)
-FROM docker-registry.wikimedia.org/bullseye
+FROM docker-registry.wikimedia.org/bullseye:latest
 
 
 # Unlike other images, this is a minimal set of packages for statically compiled

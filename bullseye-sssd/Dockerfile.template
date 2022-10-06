@@ -5,7 +5,7 @@
 # Sets up:
 #   Extra Apt repo: Toolforge repo
 #   Users and Groups from WMCS LDAP (with mount required for sssd)
-FROM docker-registry.wikimedia.org/bullseye
+FROM docker-registry.wikimedia.org/bullseye:latest
 
 # Add certs for apt to use HTTPS for deb-tools.wmcloud.org
 {{ macros.apt_install(

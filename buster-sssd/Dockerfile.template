@@ -5,7 +5,7 @@
 # Sets up:
 #   Extra Apt repo: Tools repo
 #   Users and Groups from labs LDAP (with mount required for sssd)
-FROM docker-registry.wikimedia.org/wikimedia-buster
+FROM docker-registry.wikimedia.org/buster:latest
 
 # Add certs for apt to use HTTPS for deb-tools.wmflabs.org
 {{ macros.apt_install(

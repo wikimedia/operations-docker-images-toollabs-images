@@ -4,7 +4,7 @@
 # Source image: Debian Buster
 # Sets up:
 #   Users and Groups from labs LDAP (with mount required for sssd)
-FROM docker-registry.wikimedia.org/wikimedia-buster
+FROM docker-registry.wikimedia.org/buster:latest
 
 
 # Unlike other images, this is a minimal set of packages for statically compiled

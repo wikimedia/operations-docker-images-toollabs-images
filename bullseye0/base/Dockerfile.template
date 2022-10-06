@@ -6,7 +6,7 @@
 #   Toolforge apt repository
 #   Base packages
 #   Labels and environment for buildpacks
-FROM docker-registry.wikimedia.org/bullseye
+FROM docker-registry.wikimedia.org/bullseye:latest
 
 # Some packages that pretty much everything needs.
 # Be conservative!
