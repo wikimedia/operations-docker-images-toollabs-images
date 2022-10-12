@@ -3,6 +3,7 @@
 # Name: docker-registry.tools.wmflabs.org/toolforge-jdk11-sssd-base
 FROM {{registry}}/{{image_prefix}}-buster-sssd:{{tag}}
 
+RUN mkdir -p /usr/share/man/man1
 {{ macros.apt_install(
     [
         "openjdk-11-jdk",
