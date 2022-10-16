@@ -16,6 +16,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "libberkeleydb-perl",
         "libbot-basicbot-perl",
         "libbsd-resource-perl",
+        "libbytes-random-secure-perl",
         "libcache-memcached-fast-perl",
         "libcgi-fast-perl",
         "libclass-data-inheritable-perl",
