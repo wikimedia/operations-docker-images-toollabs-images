@@ -8,4 +8,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "mono-complete",
     ]
 ) }}
+
+# Hack around https://github.com/mono/mono/issues/21233
+RUN sed -i 's#mozilla/DST_Root_CA_X3.crt#!mozilla/DST_Root_CA_X3.crt#' /etc/ca-certificates.conf && update-ca-certificates
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
