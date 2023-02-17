@@ -51,6 +51,7 @@ IMAGES = {
     "bullseye-sssd": {
         "jdk17-sssd/base": ["jdk17-sssd/web"],
         "mono68-sssd/base": [],
+        "mariadb-sssd/base": [],
         "node12-sssd/base": ["node12-sssd/web"],
         "node16-sssd/base": ["node16-sssd/web"],
         "perl532-sssd/base": ["perl532-sssd/web"],
