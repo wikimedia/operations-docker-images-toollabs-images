@@ -24,20 +24,6 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # We rely on docker caching to ensure this is not super
 # dead slow.
 IMAGES = {
-    "jessie-sssd": {
-        "python2-sssd/base": ["python2-sssd/web"],
-        "php5-sssd/base": ["php5-sssd/web"],
-        "node6-sssd/base": ["node6-sssd/web"],
-        "python34-sssd/base": ["python34-sssd/web"],
-        "ruby21-sssd/base": ["ruby21-sssd/web"],
-    },
-    "stretch-sssd": {
-        "python35-sssd/base": ["python35-sssd/web"],
-        "golang-sssd/base": ["golang-sssd/web"],
-        "jdk8-sssd/base": ["jdk8-sssd/web"],
-        "node10-sssd/base": ["node10-sssd/web"],
-        "php72-sssd/base": ["php72-sssd/web"],
-    },
     "buster-sssd": {
         "golang111-sssd/base": ["golang111-sssd/web"],
         "jdk11-sssd/base": ["jdk11-sssd/web"],

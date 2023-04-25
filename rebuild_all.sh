@@ -12,8 +12,7 @@ clean_docker_layers () {
         xargs --no-run-if-empty docker rmi
 }
 
-for series in bullseye-sssd buster-sssd stretch-sssd; do
-    # Images for the 2020 k8s cluster
+for series in bullseye-sssd buster-sssd; do
     echo "=== START toolforge ${series} ==="
     # Build and push the base image first.
     ${PYTHON:-python3} build.py --image-prefix toolforge --tag latest --no-cache --push --single $series ${@}
