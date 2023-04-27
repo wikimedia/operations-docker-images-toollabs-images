@@ -1,2 +1,0 @@
-#deb http://mirrors.wikimedia.org/debian/ jessie main
-deb http://archive.debian.org/debian/ jessie contrib main non-free
