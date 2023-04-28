@@ -14,10 +14,15 @@ clean_docker_layers () {
 
 for series in bullseye-sssd buster-sssd; do
     echo "=== START toolforge ${series} ==="
+    # Clean layers, but ignore errors because the cleaner is a bit sketchy
+    clean_docker_layers || /bin/true
+
     # Build and push the base image first.
     ${PYTHON:-python3} build.py --image-prefix toolforge --tag latest --no-cache --push --single $series ${@}
+
     # Build and push all dependent images.
     ${PYTHON:-python3} build.py --image-prefix toolforge --tag latest --no-cache --push $series ${@}
+
     # Clean layers, but ignore errors because the cleaner is a bit sketchy
     clean_docker_layers || /bin/true
     echo "=== END toolforge ${series} ==="
