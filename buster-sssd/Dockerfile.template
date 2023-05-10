@@ -32,6 +32,7 @@ ADD tools.list /etc/apt/sources.list.d/tools.list
         "locales",
         "locales-all",
         "nano",
+        "openssh-client",
         "sed",
         "vim",
     ],
