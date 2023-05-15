@@ -60,6 +60,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "libnetaddr-ip-perl",
         "libobject-pluggable-perl",
         "libparse-mediawikidump-perl",
+        "libphp-serialization-perl",
         "libpod-simple-wiki-perl",
         "libpoe-component-irc-perl",
         "libpoe-component-syndicator-perl",
