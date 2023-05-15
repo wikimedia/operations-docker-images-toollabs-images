@@ -53,6 +53,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
         "liblwp-protocol-https-perl",
         "libmediawiki-api-perl",
         "libmediawiki-bot-perl",
+        "libmime-lite-perl",
         "libnet-netmask-perl",
         "libnet-oauth-perl",
         "libnet-ssleay-perl",
