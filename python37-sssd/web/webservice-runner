@@ -1,14 +1,8 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 # Make sure $USER is always set
 USER=${USER:-$(whoami)}
-
-# Use awk to split by period and return the second item (tool names can't have
-# periods in them)
-# tools.foo -> foo
-# toolsbeta.foo -> foo
-TOOL=$(echo $USER | awk -F. '{print $2}')
 
 if [ -d "$HOME/www/python/venv" ]; then
   venv="--venv $HOME/www/python/venv"
@@ -34,7 +28,7 @@ exec /usr/bin/uwsgi \
     --callable app \
     --manage-script-name \
     --workers 4 \
-    --mount "/$TOOL=$HOME/www/python/src/app.py" \
+    --wsgi-file app.py \
     --die-on-term \
     --strict \
     --master \
