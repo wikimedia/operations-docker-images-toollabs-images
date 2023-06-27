@@ -35,7 +35,6 @@ IMAGES = {
     "buster-standalone": [],
     "bullseye-sssd": {
         "jdk17-sssd/base": ["jdk17-sssd/web"],
-        "mariadb-sssd/base": [],
         "mono68-sssd/base": [],
         "node12-sssd/base": ["node12-sssd/web"],
         "node16-sssd/base": ["node16-sssd/web"],
@@ -49,6 +48,7 @@ IMAGES = {
     # buildpack stacks
     "bullseye0/base": ["bullseye0/build", "bullseye0/run"],
     "bookworm-sssd": {
+        "mariadb-sssd/base": [],
         "node18-sssd/base": ["node18-sssd/web"],
         "python311-sssd/base": ["python311-sssd/web"],
         "ruby31-sssd/base": ["ruby31-sssd/web"],

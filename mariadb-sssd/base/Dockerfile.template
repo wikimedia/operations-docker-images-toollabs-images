@@ -1,7 +1,7 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge mariadb/mysql maintenance image
 # Name: docker-registry.tools.wmflabs.org/toolforge-mariadb-sssd-base
-FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
+FROM {{registry}}/{{image_prefix}}-bookworm-sssd:{{tag}}
 
 {{ macros.apt_install(
     [
