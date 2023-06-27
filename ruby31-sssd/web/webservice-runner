@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+
+# Provide these for tools to use
+export PORT="8000"
+export TOOL_WEB_PORT="8000"
+
+extra_args=()
+# Whether to skip the next parameter
+skip="false"
+# Whether we've seen --type and --port yet, we only
+# want to drop the first occurrence
+seen_type="false"
+seen_port="false"
+
+for arg in "$@"; do
+    if [[ "${skip}" == "true" ]]; then
+        skip="false"
+        continue
+    fi
+    case $arg in
+        --type)
+            if [[ "${seen_type}" == "false" ]]; then
+                skip="true"
+                seen_type="true"
+            else
+                extra_args+=( "$arg" )
+            fi;;
+        --port)
+            if [[ "${seen_port}" == "false" ]]; then
+                skip="true"
+                seen_port="true"
+            else
+                extra_args+=( "$arg" )
+            fi;;
+        *)
+            extra_args+=( "$arg" );;
+    esac
+done
+
+exec "${extra_args[@]}"

@@ -49,7 +49,9 @@ IMAGES = {
     # buildpack stacks
     "bullseye0/base": ["bullseye0/build", "bullseye0/run"],
     "bookworm-sssd": {
+        "node18-sssd/base": ["node18-sssd/web"],
         "python311-sssd/base": ["python311-sssd/web"],
+        "ruby31-sssd/base": ["ruby31-sssd/web"],
     },
 }
 
