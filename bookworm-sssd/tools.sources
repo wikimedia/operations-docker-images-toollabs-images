@@ -1,0 +1,5 @@
+Types: deb
+URIs: https://deb-tools.wmcloud.org/repo/
+Suites: bookworm-tools
+Components: main
+Trusted: yes

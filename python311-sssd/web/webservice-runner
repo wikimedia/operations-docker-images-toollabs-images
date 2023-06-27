@@ -1,0 +1,35 @@
+#!/bin/bash
+set -euxo pipefail
+
+# Make sure $USER is always set
+USER=${USER:-$(whoami)}
+
+if [ -d "$HOME/www/python/venv" ]; then
+  venv="--venv $HOME/www/python/venv"
+else
+  venv=""
+fi
+
+if [ -f "$HOME/www/python/uwsgi.ini" ]; then
+  ini="--ini $HOME/www/python/uwsgi.ini"
+else
+  ini=""
+fi
+
+# Provide these for tools to use
+export PORT="8000"
+export TOOL_WEB_PORT="8000"
+
+exec /usr/bin/uwsgi \
+    --plugin python3 \
+    --http-socket :${PORT} \
+    --chdir $HOME/www/python/src \
+    --logto $HOME/uwsgi.log \
+    --callable app \
+    --manage-script-name \
+    --workers 4 \
+    --wsgi-file app.py \
+    --die-on-term \
+    --strict \
+    --master \
+    $venv $ini

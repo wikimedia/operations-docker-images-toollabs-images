@@ -48,6 +48,9 @@ IMAGES = {
     "bullseye-standalone": [],
     # buildpack stacks
     "bullseye0/base": ["bullseye0/build", "bullseye0/run"],
+    "bookworm-sssd": {
+        "python311-sssd/base": ["python311-sssd/web"],
+    },
 }
 
 # Unbuffer print output (https://stackoverflow.com/a/40161931/8171)
