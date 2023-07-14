@@ -87,8 +87,8 @@ def rm_dockerfile(name):
 def build_image(name, registry, image_prefix, no_cache, tag, jinja_env):
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
     print(
-        "\x1b[32m  Building {}/{}-{}:{}\x1b[0m".format(
-            registry, image_prefix, name, tag
+        "\x1b[32m  Building {}\x1b[0m".format(
+            make_docker_tag(name, registry, image_prefix, tag)
         )
     )
     print("\x1b[32m" + ("#" * 78) + "\x1b[0m")
