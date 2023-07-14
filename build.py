@@ -50,6 +50,7 @@ IMAGES = {
     "bookworm-sssd": {
         "mariadb-sssd/base": [],
         "node18-sssd/base": ["node18-sssd/web"],
+        "php82-sssd/base": ["php82-sssd/web"],
         "python311-sssd/base": ["python311-sssd/web"],
         "ruby31-sssd/base": ["ruby31-sssd/web"],
     },
