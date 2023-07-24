@@ -13,7 +13,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye0-base:{{tag}}
 apt_options="--no-install-recommends",
 ) }}
 
-COPY install-packages /usr/bin/install-packages
+COPY {{image_path}}/install-packages /usr/bin/install-packages
 
 USER tfb
 

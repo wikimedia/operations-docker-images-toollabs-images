@@ -69,7 +69,7 @@ def make_docker_tag(name, registry, image_prefix, tag):
 
 
 def make_dockerfile(name, registry, image_prefix, tag, jinja_env):
-    ctx = {"registry": registry, "image_prefix": image_prefix, "tag": tag}
+    ctx = {"registry": registry, "image_prefix": image_prefix, "tag": tag, "image_path": name}
     tmpl = jinja_env.get_template("{}/Dockerfile.template".format(name))
     dockerfile = tmpl.render(**ctx)
     if dockerfile is None:
@@ -98,10 +98,12 @@ def build_image(name, registry, image_prefix, no_cache, tag, jinja_env):
         "build",
         "-t",
         make_docker_tag(name, registry, image_prefix, tag),
+        "-f",
+        f"{name}/Dockerfile",
     ]
     if no_cache:
         args.append("--no-cache")
-    args.append(os.path.join(BASE_PATH, name))
+    args.append(BASE_PATH)
     subprocess.check_call(args)
     rm_dockerfile(name)
 

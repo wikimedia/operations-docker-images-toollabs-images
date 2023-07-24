@@ -3,5 +3,5 @@
 # Name: docker-registry.tools.wmflabs.org/toolforge-node18-sssd-web
 FROM {{registry}}/{{image_prefix}}-node18-sssd-base:{{tag}}
 
-COPY webservice-runner /usr/bin/
+COPY {{image_path}}/webservice-runner /usr/bin/
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

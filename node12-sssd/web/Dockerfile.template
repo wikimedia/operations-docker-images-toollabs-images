@@ -10,5 +10,5 @@ FROM {{registry}}/{{image_prefix}}-node12-sssd-base:{{tag}}
         "python3",
     ]
 ) }}
-COPY webservice-runner /usr/bin/
+COPY {{image_path}}/webservice-runner /usr/bin/
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

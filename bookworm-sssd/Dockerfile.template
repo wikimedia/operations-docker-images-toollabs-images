@@ -16,7 +16,7 @@ FROM docker-registry.wikimedia.org/bookworm:latest
 ) }}
 
 # Add tools debian repo to this container
-COPY tools.sources /etc/apt/sources.list.d/tools.sources
+COPY {{image_path}}/tools.sources /etc/apt/sources.list.d/tools.sources
 
 # Some packages that pretty much everyone needs.
 # Be conservative, and do not include things that are language specific!
@@ -45,7 +45,7 @@ COPY tools.sources /etc/apt/sources.list.d/tools.sources
 # Setup NSS with LDAP/SSSD. This requires that we mount /var/lib/sss/pipes from
 # the underlying cloud host to the container. If not mounted, it will fallback
 # gracefully and just not use LDAP for NSS.
-COPY nsswitch.conf /etc/nsswitch.conf
+COPY {{image_path}}/nsswitch.conf /etc/nsswitch.conf
 
 # Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
 # (which sucks!) Cultural imperialism, etc
