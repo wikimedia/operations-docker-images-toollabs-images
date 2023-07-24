@@ -1,4 +1,5 @@
 #!/bin/bash
+# Start a uwsgi container mounting $HOME/www/python/src/app.py.
 set -euxo pipefail
 
 # Make sure $USER is always set

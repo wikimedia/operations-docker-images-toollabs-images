@@ -10,6 +10,6 @@ FROM {{registry}}/{{image_prefix}}-python311-sssd-base:{{tag}}
     ]
 ) }}
 
-COPY {{image_path}}/webservice-python-bootstrap /usr/local/bin/
-COPY {{image_path}}/webservice-runner /usr/bin/
+COPY shared/python/webservice-python-bootstrap /usr/local/bin/
+COPY shared/python/webservice-runner /usr/bin/
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
