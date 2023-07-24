@@ -1,9 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-
-# Provide these for tools to use
-export PORT="8000"
-export TOOL_WEB_PORT="8000"
-
-cd $HOME/www/js
-exec /usr/bin/npm start
