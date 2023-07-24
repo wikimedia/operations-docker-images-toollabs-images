@@ -24,7 +24,7 @@ FROM docker-registry.wikimedia.org/bullseye:latest
 ) }}
 
 # Add tools debian repo to this container
-ADD tools.list /etc/apt/sources.list.d/tools.list
+COPY tools.list /etc/apt/sources.list.d/tools.list
 
 # Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
 RUN update-locale LANG=en_US.UTF-8

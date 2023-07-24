@@ -25,7 +25,7 @@ FROM docker-registry.wikimedia.org/buster:latest
 # Setup NSS with LDAP/SSSD. This requires that we mount /var/lib/sss/pipes from
 # the underlying cloud host to the container. If not mounted, it will fallback
 # gracefully and just not use LDAP for NSS.
-ADD nsswitch.conf /etc/nsswitch.conf
+COPY nsswitch.conf /etc/nsswitch.conf
 
 # Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
 # (which sucks!) Cultural imperialism, etc

@@ -7,7 +7,7 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
 
 # NodeSource repo mirrors, since Bullseye ships a really old version (12)
 # This image should be retired once Bullseye+1 ships with node 18+
-ADD node16.list /etc/apt/sources.list.d/node16.list
+COPY node16.list /etc/apt/sources.list.d/node16.list
 
 # Includes *-dev packages needed for installing popular packages.
 # Each needs a ticket filed under T140110 and tracking here:
