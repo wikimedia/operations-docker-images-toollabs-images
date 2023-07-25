@@ -613,6 +613,16 @@ fastcgi.server += ( ".php" =>
 EOF
 fi
 
+if [ -f "/etc/toolforge-enable-perl" ]; then
+  cat <<EOF >> "$CONFIG_FILE"
+
+cgi.assign = (
+  ".pl" => "/usr/bin/perl",
+)
+
+EOF
+fi
+
 if [ -f "$HOME/lighttpd.conf" ]; then
   cat "$HOME/lighttpd.conf" >> "$CONFIG_FILE"
 fi
