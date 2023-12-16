@@ -623,8 +623,8 @@ cgi.assign = (
 EOF
 fi
 
-if [ -f "$HOME/lighttpd.conf" ]; then
-  cat "$HOME/lighttpd.conf" >> "$CONFIG_FILE"
+if [ -f "$HOME/.lighttpd.conf" ]; then
+  cat "$HOME/.lighttpd.conf" >> "$CONFIG_FILE"
 fi
 
 exec /usr/sbin/lighttpd -f "$CONFIG_FILE" -D
