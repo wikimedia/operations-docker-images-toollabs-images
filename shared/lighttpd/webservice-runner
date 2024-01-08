@@ -600,11 +600,6 @@ fastcgi.server += ( ".php" =>
       "PHP_FCGI_CHILDREN" => "2",
       "PHP_FCGI_MAX_REQUESTS" => "500"
     ),
-    "bin-copy-environment" => (
-      "PATH",
-      "SHELL",
-      "USER"
-    ),
     "broken-scriptfilename" => "enable",
     "allow-x-send-file" => "enable"
   ))
