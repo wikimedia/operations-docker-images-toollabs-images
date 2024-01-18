@@ -39,6 +39,9 @@ IMAGES = {
     # buildpack stacks
     "bullseye0/base": ["bullseye0/build", "bullseye0/run"],
     "bookworm-sssd": {
+        # bookworm-sssd is also the standalone bookworm container,
+        # web one just has webservice-runner included with it
+        "bookworm-web-sssd": [],
         "mariadb-sssd/base": [],
         "node18-sssd/base": ["node18-sssd/web"],
         "perl536-sssd/base": ["perl536-sssd/web"],
