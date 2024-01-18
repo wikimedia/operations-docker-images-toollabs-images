@@ -24,15 +24,6 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # We rely on docker caching to ensure this is not super
 # dead slow.
 IMAGES = {
-    "buster-sssd": {
-        "golang111-sssd/base": ["golang111-sssd/web"],
-        "jdk11-sssd/base": ["jdk11-sssd/web"],
-        "php73-sssd/base": ["php73-sssd/web"],
-        "python37-sssd/base": ["python37-sssd/web"],
-        "ruby25-sssd/base": ["ruby25-sssd/web"],
-        "html-sssd/web": [],
-    },
-    "buster-standalone": [],
     "bullseye-sssd": {
         "jdk17-sssd/base": ["jdk17-sssd/web"],
         "mono68-sssd/base": [],
