@@ -7,12 +7,8 @@ FROM {{registry}}/{{image_prefix}}-tcl86-sssd-base:{{tag}}
     [
         "libfcgi-dev",
         "lighttpd",
-        "toolforge-webservice",
     ]
 ) }}
 
-# This is where lighttpd puts its config files.
-# Very unideal, but let's stick to same places as
-# the gridengine for right now
-RUN mkdir /var/run/lighttpd/ && chmod 0777 /var/run/lighttpd/
+COPY shared/lighttpd/webservice-runner /usr/bin/
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}

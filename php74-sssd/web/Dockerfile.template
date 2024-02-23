@@ -8,12 +8,9 @@ FROM {{registry}}/{{image_prefix}}-php74-sssd-base:{{tag}}
         "lighttpd",
         "lighttpd-mod-openssl",
         "php7.4-cgi",
-        "toolforge-webservice",
     ]
 ) }}
 
-# This is where lighttpd puts its config files.
-# Very unideal, but let's stick to same places as
-# the gridengine for right now
-RUN mkdir /var/run/lighttpd/ && chmod 0777 /var/run/lighttpd/
+COPY shared/lighttpd/webservice-runner /usr/bin/
+RUN touch /etc/toolforge-enable-php
 {# vim:sw=4:ts=4:sts=4:et:ft=django: #}
