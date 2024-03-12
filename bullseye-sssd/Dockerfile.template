@@ -35,6 +35,7 @@ COPY {{image_path}}/tools.list /etc/apt/sources.list.d/tools.list
         "make",
         "nano",
         "openssh-client",
+        "procps",
         "sed",
         "vim",
         "zstd",
