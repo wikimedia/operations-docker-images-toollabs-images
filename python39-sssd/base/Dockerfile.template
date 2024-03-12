@@ -24,4 +24,4 @@ FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
     ]
 ) }}
 
-{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}

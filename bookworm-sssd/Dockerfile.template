@@ -54,4 +54,4 @@ COPY shared/etc/nsswitch.conf /etc/nsswitch.conf
 RUN update-locale LANG=en_US.UTF-8
 
 ENV LC_ALL en_US.UTF-8
-{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}

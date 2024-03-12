@@ -11,4 +11,4 @@ FROM {{registry}}/{{image_prefix}}-ruby27-sssd-base:{{tag}}
     ]
 ) }}
 COPY shared/generic/webservice-runner /usr/bin/
-{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}

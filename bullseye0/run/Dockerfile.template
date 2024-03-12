@@ -7,5 +7,5 @@ FROM {{registry}}/{{image_prefix}}-bullseye0-base:{{tag}}
 
 USER tfb
 
-{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}
 

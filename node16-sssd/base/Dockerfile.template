@@ -29,4 +29,4 @@ RUN npm config set update-notifier false
 # Pinned since I don't trust it to not break if I don't pin it.
 RUN npm install -g yarn@1.22.19
 
-{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}

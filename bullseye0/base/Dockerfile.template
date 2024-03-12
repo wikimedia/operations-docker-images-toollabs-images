@@ -41,5 +41,5 @@ ENV CNB_GROUP_ID=61312
 RUN groupadd tfb --gid $CNB_GROUP_ID && \
   useradd --uid $CNB_USER_ID --gid $CNB_GROUP_ID -m -s /bin/bash tfb
 
-{# vim:sw=4:ts=4:sts=4:et:ft=django: #}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}
 
