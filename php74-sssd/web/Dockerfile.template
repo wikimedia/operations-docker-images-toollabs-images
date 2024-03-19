@@ -3,11 +3,13 @@
 # Name: docker-registry.tools.wmflabs.org/toolforge-php74-sssd-web
 FROM {{registry}}/{{image_prefix}}-php74-sssd-base:{{tag}}
 
+# python3 is backwards compat from the old webservice-runner, do not copy forward!
 {{ macros.apt_install(
     [
         "lighttpd",
         "lighttpd-mod-openssl",
         "php7.4-cgi",
+        "python3",
     ]
 ) }}
 
