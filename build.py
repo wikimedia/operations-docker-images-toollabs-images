@@ -116,7 +116,7 @@ def push_image(name, registry, image_prefix, tag):
 
 def lineage_of(name):
     def children_of(node):
-        if type(node) == dict:
+        if type(node) is dict:
             children = list(node.keys())
             for k, v in node.items():
                 children += children_of(v)
@@ -126,11 +126,11 @@ def lineage_of(name):
     def ancestors_of(node, cur_lineage):
         if name in node:
             cur_lineage.append(name)
-            if type(node) == dict:
+            if type(node) is dict:
                 cur_lineage.extend(children_of(node[name]))
             return cur_lineage
 
-        if type(node) == dict:
+        if type(node) is dict:
             for k, v in node.items():
                 ret = ancestors_of(v, cur_lineage + [k])
                 if ret:
