@@ -13,6 +13,8 @@ fi
 
 if [ -f "$HOME/www/python/uwsgi.ini" ]; then
   ini="--ini $HOME/www/python/uwsgi.ini"
+elif [ -f "$HOME/www/python/src/uwsgi.ini" ]; then
+  ini="--ini $HOME/www/python/src/uwsgi.ini"
 else
   ini=""
 fi
