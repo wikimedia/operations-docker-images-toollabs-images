@@ -12,7 +12,7 @@ clean_docker_layers () {
         xargs --no-run-if-empty docker rmi
 }
 
-for series in bookworm-sssd bullseye-sssd; do
+for series in trixie-sssd bookworm-sssd bullseye-sssd; do
     echo "=== START toolforge ${series} ==="
     # Clean layers, but ignore errors because the cleaner is a bit sketchy
     clean_docker_layers || /bin/true

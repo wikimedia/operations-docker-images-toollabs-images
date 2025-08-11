@@ -1,0 +1,58 @@
+{%- import 'macros.jinja2' as macros -%}
+# Base Toolforge trixie user image
+# Name: docker-registry.tools.wmflabs.org/toolforge-trixie-sssd
+# Source image: Debian 13 Trixie
+# Sets up:
+#   Extra Apt repo: Toolforge repo
+#   Users and Groups from WMCS LDAP (with mount required for sssd)
+FROM docker-registry.wikimedia.org/trixie:latest
+
+# Add certs for apt to use HTTPS for deb-tools.wmcloud.org
+{{ macros.apt_install(
+    [
+        "ca-certificates",
+    ],
+    apt_options="--no-install-recommends",
+) }}
+
+# Toolforge tools debian repo to this container
+COPY {{image_path}}/tools.sources /etc/apt/sources.list.d/tools.sources
+
+# Some packages that pretty much everyone needs.
+# Be conservative, and do not include things that are language specific!
+{{ macros.apt_install(
+    [
+        "bzip2",
+        "curl",
+        "emacs-nox",
+        "gawk",
+        "git",
+        "jq",
+        "less",
+        "libnss-sss",
+        "locales",
+        "locales-all",
+        "make",
+        "nano",
+        "openssh-client",
+        "procps",
+        "sed",
+        "unzip",
+        "vim",
+        "zip",
+        "zstd",
+    ],
+    apt_options="--no-install-recommends",
+) }}
+
+# Setup NSS with LDAP/SSSD. This requires that we mount /var/lib/sss/pipes from
+# the underlying cloud host to the container. If not mounted, it will fallback
+# gracefully and just not use LDAP for NSS.
+COPY shared/etc/nsswitch.conf /etc/nsswitch.conf
+
+# Setup the en_US.UTF-8 Locale, since otherwise it defaults to the C one
+# (which sucks!) Cultural imperialism, etc
+RUN update-locale LANG=en_US.UTF-8
+
+ENV LC_ALL en_US.UTF-8
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}

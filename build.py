@@ -49,6 +49,17 @@ IMAGES = {
         "python311-sssd/base": ["python311-sssd/web"],
         "ruby31-sssd/base": ["ruby31-sssd/web"],
     },
+    "trixie-sssd": {
+        # trixie-sssd is also the standalone trixie container,
+        # web one just has webservice-runner included with it
+        "trixie-web-sssd": [],
+        "jdk21-sssd/base": ["jdk21-sssd/web"],
+        "node20-sssd/base": ["node20-sssd/web"],
+        "perl540-sssd/base": ["perl540-sssd/web"],
+        "php84-sssd/base": ["php84-sssd/web"],
+        "python313-sssd/base": ["python313-sssd/web"],
+        "ruby33-sssd/base": ["ruby33-sssd/web"],
+    },
 }
 
 # Unbuffer print output (https://stackoverflow.com/a/40161931/8171)

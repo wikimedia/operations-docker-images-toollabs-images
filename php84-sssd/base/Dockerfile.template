@@ -1,0 +1,31 @@
+{%- import 'macros.jinja2' as macros -%}
+# Toolforge PHP runtime image
+# Name: docker-registry.tools.wmflabs.org/toolforge-php84-sssd-base
+FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
+
+# Unzip improves composer's handling of certain zip features (unix permissions for example)
+{{ macros.apt_install(
+    [
+        "composer",
+        "php-apcu",
+        "php-imagick",
+        "php-redis",
+        "php8.4-bcmath",
+        "php8.4-bz2",
+        "php8.4-cli",
+        "php8.4-curl",
+        "php8.4-dba",
+        "php8.4-gd",
+        "php8.4-intl",
+        "php8.4-mbstring",
+        "php8.4-mysql",
+        "php8.4-pgsql",
+        "php8.4-soap",
+        "php8.4-sqlite3",
+        "php8.4-xsl",
+        "php8.4-yaml",
+        "php8.4-zip",
+        "unzip",
+    ]
+) }}
+{# vim: set sw=4 ts=4 sts=4 et ft=django: #}
