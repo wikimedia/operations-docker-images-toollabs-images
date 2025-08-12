@@ -54,6 +54,7 @@ IMAGES = {
         # web one just has webservice-runner included with it
         "trixie-web-sssd": [],
         "jdk21-sssd/base": ["jdk21-sssd/web"],
+        "mono612-sssd/base": [],
         "node20-sssd/base": ["node20-sssd/web"],
         "perl540-sssd/base": ["perl540-sssd/web"],
         "php84-sssd/base": ["php84-sssd/web"],
