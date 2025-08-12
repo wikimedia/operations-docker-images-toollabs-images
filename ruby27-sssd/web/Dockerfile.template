@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Ruby webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-ruby27-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-ruby27-sssd-web
 FROM {{registry}}/{{image_prefix}}-ruby27-sssd-base:{{tag}}
 
 # Install Python3 for backwards-compatibility. Do not

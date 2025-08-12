@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Perl 5.36 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-perl536-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-perl536-sssd-base
 FROM {{registry}}/{{image_prefix}}-bookworm-sssd:{{tag}}
 
 # Massive list of packages taken from profile::toolforge::grid::exec_environ.

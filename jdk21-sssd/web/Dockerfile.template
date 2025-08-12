@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Java 21 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-jdk21-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-jdk21-sssd-web
 FROM {{registry}}/{{image_prefix}}-jdk21-sssd-base:{{tag}}
 
 COPY shared/generic/webservice-runner /usr/bin/

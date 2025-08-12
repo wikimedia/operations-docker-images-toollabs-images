@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Base Toolforge bookworm user image
-# Name: docker-registry.tools.wmflabs.org/toolforge-bookworm-sssd
+# Name: docker-registry.svc.toolforge.org/toolforge-bookworm-sssd
 # Source image: Debian 12 Bookworm
 # Sets up:
 #   Extra Apt repo: Toolforge repo

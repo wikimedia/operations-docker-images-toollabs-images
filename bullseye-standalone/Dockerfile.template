@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Stripped down toolforge bullseye user image for binary webservices
-# Name: docker-registry.tools.wmflabs.org/toolforge-bullseye-standalone
+# Name: docker-registry.svc.toolforge.org/toolforge-bullseye-standalone
 # Source image: Debian Bullseye
 # Sets up:
 #   Users and Groups from WMCS LDAP (with mount required for sssd)

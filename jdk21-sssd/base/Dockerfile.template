@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Java 21 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-jdk21-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-jdk21-sssd-base
 FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
 
 RUN mkdir -p /usr/share/man/man1  # The day it works without this, remove this.

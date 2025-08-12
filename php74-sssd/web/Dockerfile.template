@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge PHP 7.4 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-php74-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-php74-sssd-web
 FROM {{registry}}/{{image_prefix}}-php74-sssd-base:{{tag}}
 
 # python3 is backwards compat from the old webservice-runner, do not copy forward!

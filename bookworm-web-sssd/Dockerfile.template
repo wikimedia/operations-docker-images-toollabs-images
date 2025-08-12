@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Debian 12 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-bookworm-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-bookworm-sssd-web
 FROM {{registry}}/{{image_prefix}}-bookworm-sssd:{{tag}}
 
 COPY shared/generic/webservice-runner /usr/bin/

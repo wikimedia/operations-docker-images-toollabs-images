@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Ruby 3.1 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-ruby31-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-ruby31-sssd-web
 FROM {{registry}}/{{image_prefix}}-ruby31-sssd-base:{{tag}}
 
 COPY shared/generic/webservice-runner /usr/bin/

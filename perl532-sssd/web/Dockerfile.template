@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Perl 5.32 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-perl532-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-perl532-sssd-web
 FROM {{registry}}/{{image_prefix}}-perl532-sssd-base:{{tag}}
 
 # python3 is backwards compat from the old webservice-runner, do not copy forward!

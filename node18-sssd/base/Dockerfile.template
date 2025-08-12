@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge NodeJS 18 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-node18-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-node18-sssd-base
 FROM {{registry}}/{{image_prefix}}-bookworm-sssd:{{tag}}
 
 # Includes *-dev packages needed for installing popular packages.

@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge PHP 8.4 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-php84-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-php84-sssd-web
 FROM {{registry}}/{{image_prefix}}-php84-sssd-base:{{tag}}
 
 {{ macros.apt_install(

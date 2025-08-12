@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge NodeJS 16 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-node16-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-node16-sssd-base
 FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
 
 # If you are creating a newer nodejs image: please copy node12 instead of this one.

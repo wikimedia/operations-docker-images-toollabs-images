@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge PHP runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-php82-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-php82-sssd-base
 FROM {{registry}}/{{image_prefix}}-bookworm-sssd:{{tag}}
 
 # Unzip improves composer's handling of certain zip features (unix permissions for example)

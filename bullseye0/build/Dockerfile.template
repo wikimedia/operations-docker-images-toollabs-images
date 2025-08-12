@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Build image for the Toolforge bullseye0 buildpacks
-# Name: docker-registry.tools.wmflabs.org/toolforge-bullseye0-build
+# Name: docker-registry.svc.toolforge.org/toolforge-bullseye0-build
 # Sets up:
 #   Common apt packages generally needed
 FROM {{registry}}/{{image_prefix}}-bullseye0-base:{{tag}}

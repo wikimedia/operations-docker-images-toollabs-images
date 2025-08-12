@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Perl 5.36 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-perl536-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-perl536-sssd-web
 FROM {{registry}}/{{image_prefix}}-perl536-sssd-base:{{tag}}
 
 {{ macros.apt_install(

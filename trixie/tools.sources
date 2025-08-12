@@ -1,0 +1,5 @@
+Types: deb
+URIs: https://deb.svc.toolforge.org/repo/
+Suites: trixie-tools
+Components: main
+Trusted: yes

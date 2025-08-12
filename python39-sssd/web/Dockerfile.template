@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Python 3.9 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-python39-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-python39-sssd-web
 FROM {{registry}}/{{image_prefix}}-python39-sssd-base:{{tag}}
 
 {{ macros.apt_install(

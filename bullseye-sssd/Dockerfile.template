@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Base toolforge bullseye user image
-# Name: docker-registry.tools.wmflabs.org/toolforge-bullseye-sssd
+# Name: docker-registry.svc.toolforge.org/toolforge-bullseye-sssd
 # Source image: Debian Bullseye
 # Sets up:
 #   Extra Apt repo: Toolforge repo

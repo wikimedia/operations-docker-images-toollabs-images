@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Ruby 3.3 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-ruby33-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-ruby33-sssd-base
 FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
 
 {{ macros.apt_install(

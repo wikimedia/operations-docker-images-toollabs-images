@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Python 3.13 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-python313-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-python313-sssd-base
 FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
 
 # Includes *-dev packages needed for installing popular python packages,

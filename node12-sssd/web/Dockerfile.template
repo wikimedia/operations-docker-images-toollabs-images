@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge NodeJS 12 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-node12-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-node12-sssd-web
 FROM {{registry}}/{{image_prefix}}-node12-sssd-base:{{tag}}
 
 # Install Python3 for backwards-compatibility. Do not

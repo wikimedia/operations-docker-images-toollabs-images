@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge tcl runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-tcl86-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-tcl86-sssd-base
 FROM {{registry}}/{{image_prefix}}-bullseye-sssd:{{tag}}
 
 # Bugs T58995

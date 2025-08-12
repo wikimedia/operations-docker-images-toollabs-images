@@ -167,7 +167,7 @@ def main():
     )
     argparser.add_argument(
         "--docker-registry",
-        default="docker-registry.tools.wmflabs.org",
+        default="docker-registry.svc.toolforge.org",
         help="Name of docker registry to tag images with & push to",
     )
     argparser.add_argument(

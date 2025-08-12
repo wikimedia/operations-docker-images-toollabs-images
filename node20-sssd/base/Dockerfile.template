@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge NodeJS 20 runtime image
-# Name: docker-registry.tools.wmflabs.org/toolforge-node20-sssd-base
+# Name: docker-registry.svc.toolforge.org/toolforge-node20-sssd-base
 FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
 
 # Includes *-dev packages needed for installing popular packages.

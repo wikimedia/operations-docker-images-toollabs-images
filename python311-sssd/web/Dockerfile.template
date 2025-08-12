@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge Python 3.11 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-python311-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-python311-sssd-web
 FROM {{registry}}/{{image_prefix}}-python311-sssd-base:{{tag}}
 
 {{ macros.apt_install(

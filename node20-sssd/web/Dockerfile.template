@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge NodeJS 20 webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-node20-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-node20-sssd-web
 FROM {{registry}}/{{image_prefix}}-node20-sssd-base:{{tag}}
 
 COPY shared/node/webservice-runner /usr/bin/

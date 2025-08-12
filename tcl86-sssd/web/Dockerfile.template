@@ -1,6 +1,6 @@
 {%- import 'macros.jinja2' as macros -%}
 # Toolforge tcl webserver image
-# Name: docker-registry.tools.wmflabs.org/toolforge-tcl86-sssd-web
+# Name: docker-registry.svc.toolforge.org/toolforge-tcl86-sssd-web
 FROM {{registry}}/{{image_prefix}}-tcl86-sssd-base:{{tag}}
 
 # python3 is backwards compat from the old webservice-runner, do not copy forward!
