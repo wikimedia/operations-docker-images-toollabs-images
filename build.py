@@ -33,7 +33,6 @@ IMAGES = {
         "php74-sssd/base": ["php74-sssd/web"],
         "python39-sssd/base": ["python39-sssd/web"],
         "ruby27-sssd/base": ["ruby27-sssd/web"],
-        "tcl86-sssd/base": ["tcl86-sssd/web"],
     },
     "bullseye-standalone": [],
     # buildpack stacks
@@ -60,6 +59,7 @@ IMAGES = {
         "php84-sssd/base": ["php84-sssd/web"],
         "python313-sssd/base": ["python313-sssd/web"],
         "ruby33-sssd/base": ["ruby33-sssd/web"],
+        "tcl86-sssd/base": ["tcl86-sssd/web"],
     },
 }
 
