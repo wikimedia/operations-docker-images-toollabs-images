@@ -1,13 +1,13 @@
 {%- import 'macros.jinja2' as macros -%}
-# Toolforge mariadb/mysql maintenance image
+# Toolforge MariaDB maintenance image
 # Name: docker-registry.svc.toolforge.org/toolforge-mariadb-sssd-base
-FROM {{registry}}/{{image_prefix}}-bookworm-sssd:{{tag}}
+FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
 
 {{ macros.apt_install(
     [
         "logrotate",
         "mariadb-client",
-        "misctools",
+        "toolforge-misctools-cli",
     ]
 ) }}
 {# vim: set sw=4 ts=4 sts=4 et ft=django: #}

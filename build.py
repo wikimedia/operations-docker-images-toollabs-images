@@ -42,7 +42,6 @@ IMAGES = {
         # bookworm-sssd is also the standalone bookworm container,
         # web one just has webservice-runner included with it
         "bookworm-web-sssd": [],
-        "mariadb-sssd/base": [],
         "node18-sssd/base": ["node18-sssd/web"],
         "perl536-sssd/base": ["perl536-sssd/web"],
         "php82-sssd/base": ["php82-sssd/web"],
@@ -54,6 +53,7 @@ IMAGES = {
         # web one just has webservice-runner included with it
         "trixie-web-sssd": [],
         "jdk21-sssd/base": ["jdk21-sssd/web"],
+        "mariadb-sssd/base": [],
         "mono612-sssd/base": [],
         "node20-sssd/base": ["node20-sssd/web"],
         "perl540-sssd/base": ["perl540-sssd/web"],
