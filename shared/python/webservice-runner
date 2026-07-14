@@ -20,8 +20,8 @@ else
 fi
 
 # Provide these for tools to use
-export PORT="8000"
-export TOOL_WEB_PORT="8000"
+export PORT="${PORT:-${TOOL_WEB_PORT:-8000}}"
+export TOOL_WEB_PORT="$PORT"
 
 exec /usr/bin/uwsgi \
     --plugin python3 \

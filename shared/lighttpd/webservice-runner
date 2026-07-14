@@ -4,6 +4,9 @@ set -euxo pipefail
 # Make sure $USER is always set
 USER=${USER:-$(whoami)}
 
+export PORT="${PORT:-${TOOL_WEB_PORT:-8000}}"
+export TOOL_WEB_PORT="$PORT"
+
 CONFIG_FILE=/tmp/lighttpd.conf
 
 cat > "$CONFIG_FILE" <<EOF
@@ -19,7 +22,7 @@ server.modules = (
   "mod_cgi",
 )
 
-server.port = 8000
+server.port = ${PORT}
 server.use-ipv6 = "disable"
 server.username = "${USER}"
 server.groupname = "${USER}"
