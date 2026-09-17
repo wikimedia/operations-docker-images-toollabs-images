@@ -24,19 +24,6 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # We rely on docker caching to ensure this is not super
 # dead slow.
 IMAGES = {
-    "bullseye-sssd": {
-        "jdk17-sssd/base": ["jdk17-sssd/web"],
-        "mono68-sssd/base": [],
-        "node12-sssd/base": ["node12-sssd/web"],
-        "node16-sssd/base": ["node16-sssd/web"],
-        "perl532-sssd/base": ["perl532-sssd/web"],
-        "php74-sssd/base": ["php74-sssd/web"],
-        "python39-sssd/base": ["python39-sssd/web"],
-        "ruby27-sssd/base": ["ruby27-sssd/web"],
-    },
-    "bullseye-standalone": [],
-    # buildpack stacks
-    "bullseye0/base": ["bullseye0/build", "bullseye0/run"],
     "bookworm-sssd": {
         # bookworm-sssd is also the standalone bookworm container,
         # web one just has webservice-runner included with it
