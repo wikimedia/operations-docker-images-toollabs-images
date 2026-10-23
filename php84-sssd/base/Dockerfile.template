@@ -28,4 +28,6 @@ FROM {{registry}}/{{image_prefix}}-trixie-sssd:{{tag}}
         "unzip",
     ]
 ) }}
+
+RUN echo 'session.upload_progress.enabled = 0' >> /etc/php/8.4/cli/php.in
 {# vim: set sw=4 ts=4 sts=4 et ft=django: #}
